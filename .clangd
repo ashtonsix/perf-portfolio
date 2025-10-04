@@ -1,0 +1,6 @@
+CompileFlags:
+  Add:
+    - -I/usr/local/include/simde
+    - -march=armv9-a
+    - -DSIMDE_ENABLE_NATIVE_ALIASES
+    - -std=c++23

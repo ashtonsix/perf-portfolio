@@ -1,0 +1,11 @@
+.DS_Store
+
+.cache
+.venv
+__pycache__
+build
+out
+data
+dev
+old
+compile_commands.json
