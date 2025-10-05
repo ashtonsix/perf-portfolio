@@ -13,7 +13,7 @@
 #include <thread>
 #include <unistd.h>
 
-// ---- external kernels -------------------------------------------------------
+// ---- external routines -------------------------------------------------------
 namespace bytepack {
 template <int K>
 void bytepack(const uint8_t* __restrict__ in, uint8_t* __restrict__ out, size_t n);

@@ -4,7 +4,7 @@
 
 ## Projects
 
-1. **[NEON Bytepack](./bytepack/README.md)** — bit pack/unpack micro-kernels; ~2.0× GB/s vs SOTA plane-transpose baseline.
+1. **[NEON Bytepack](./bytepack/README.md)** — bit pack/unpack routines; ~2.0× GB/s vs SOTA plane-transpose baseline.
 2. More releasing soon.
 
 ## Contact

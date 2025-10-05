@@ -6,7 +6,7 @@
 
 ## TL;DR
 
-NEON pack/unpack micro-kernels for moving K ∈ {1…7} bits per input byte into tightly packed outputs (and back). **86 GB/s** on L1-resident data, 2.0× over a plane-transpose baseline (FastPFoR-derived, compiled for NEON via SIMDe).
+NEON pack/unpack routines for moving K ∈ {1…7} bits per input byte into tightly packed outputs (and back). **86 GB/s** on L1-resident data, 2.0× over a plane-transpose baseline (FastPFoR-derived, compiled for NEON via SIMDe).
 
 _Conditions:_ L1-hot, 1 thread, Neoverse V2 (Graviton4). Full setup in **Appendix A**.
 
@@ -37,7 +37,7 @@ Exact per-K layouts are in source.
 
 ## Integration: usage in a real codec
 
-The micro-kernels are compute-cheap but memory-throughput-bound unless L1-hot. To beat plane-transpose on broader workloads, fuse bytepack into adjacent kernel stages so intermediates stay in-register and only the final artifact hits memory.
+The routines are compute-cheap but memory-throughput-bound unless L1-hot. To beat plane-transpose on broader workloads, fuse bytepack with other operations so intermediates stay in-register and only the final artifact hits memory.
 
 **Examples (inspiration).** Potential adjacent stages include delta/zigzag, dictionary lookup, or an entropy stage. See **Appendix B** for `K>8`.
 
