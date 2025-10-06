@@ -6,7 +6,7 @@
 
 ## TL;DR
 
-NEON pack/unpack routines for moving K ∈ {1…7} bits per input byte into tightly packed outputs (and back). **86 GB/s** on L1-resident data, 2.0× over a plane-transpose baseline (FastPFoR-derived, compiled for NEON via SIMDe).
+NEON pack/unpack routines for moving K ∈ {1…7} bits per input byte into tightly packed outputs (and back). **84 GB/s** on L1-resident data, 1.9× over a plane-transpose baseline (FastPFoR-derived, compiled for NEON via SIMDe).
 
 _Conditions:_ L1-hot, 1 thread, Neoverse V2 (Graviton4). Full setup in **Appendix A**.
 
@@ -56,10 +56,10 @@ I am available for hire. Contact me if you have a project or position you think 
 - **Hardware/flags.** Neoverse V2 (Graviton4), single thread, CPU pinned; `-O3 -mcpu=neoverse-v2`.
 - **Working set.** 16 KiB (4 pages), resident in L1; warm runs only.
 - **Inputs.** PRNG-generated `uint8_t[16384]`, values uniform in `[0, 2^K)`, seed fixed.
-- **Reports.** Throughput in GB/s, pack (input) and unpack (output) byte rates.
-- **Comparison.** Baseline operates on 32-bit inputs. For integers/s, NEON throughput is 8.0× baseline.
+- **Reports.** Throughput in GB/s, pack (input) and unpack (output) byte rates. Per-K and Geometric Mean (GM).
+- **Comparison.** Baseline operates on 32-bit inputs. For int/s, NEON pack throughput is 7.6× baseline.
 
-**Results:**
+**Results (Graviton4):**
 
 ```txt
 K  NEON pack   NEON unpack  Baseline pack   Baseline unpack
@@ -71,9 +71,63 @@ K  NEON pack   NEON unpack  Baseline pack   Baseline unpack
 6  79.58       68.11        44.66           57.56
 7  66.66       66.20        38.24           53.96
 8  79.73       80.17        58.37           73.35
+GM 84.51       70.76        44.71           60.34
+
+GM(NEON)     = √(84.51 × 70.76) = 77.33
+GM(Baseline) = √(44.71 × 60.34) = 51.94
 ```
 
-**Reproduction (Graviton4):**
+<details>
+
+<summary>Results (Axion C4A):</summary>
+
+Courtesy of [@deadmutex](https://news.ycombinator.com/user?id=deadmutex)
+
+```txt
+K  NEON pack   NEON unpack  Baseline pack   Baseline unpack
+1  94.77       84.05        45.01           63.12
+2  123.63      94.74        52.70           66.63
+3  94.62       83.89        45.32           68.43
+4  112.68      77.91        58.10           78.20
+5  86.96       80.02        44.32           60.77
+6  93.50       92.08        51.22           67.20
+7  87.10       79.53        43.94           57.95
+8  90.49       92.36        68.99           83.88
+GM 97.26       85.35        50.60           67.80
+
+GM(NEON)     = √(97.26 × 85.35) = 91.11
+GM(Baseline) = √(50.60 × 67.80) = 58.57
+```
+
+</details>
+
+<details>
+
+<summary>Results (Apple M1 laptop):</summary>
+
+Courtesy of [@DavidBuchanan314](https://github.com/DavidBuchanan314). Compiled with `-mcpu=native`.
+
+```txt
+K  NEON pack   NEON unpack  Baseline pack   Baseline unpack
+1  17.46       10.32        4.74            9.38
+2  15.67       8.77         5.29            7.36
+3  12.71       9.02         4.23            9.03
+4  12.11       9.18         5.57            8.49
+5  11.61       10.15        4.80            7.58
+6  9.88        8.69         4.83            7.22
+7  11.27       8.66         5.25            7.38
+8  8.41        9.80         6.57            8.80
+GM 12.10       9.30         5.12            8.12
+
+GM(NEON)     = √(12.10 × 9.30) = 10.61
+GM(Baseline) = √(5.12  × 8.12) = 6.45
+```
+
+</details>
+
+**Reproduction:**
+
+Install dependencies per the top-level repository [README](../README.md), then:
 
 ```sh
 make -f bytepack.mk && ./out/bytepack_eval
