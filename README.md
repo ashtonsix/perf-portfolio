@@ -4,12 +4,14 @@
 
 ## Projects
 
-1. **[NEON Bytepack](./bytepack/README.md)** — bit pack/unpack routines; ~2.0× GB/s vs SOTA plane-transpose baseline.
+1. **[NEON Bytepack](./bytepack/README.md)** — bit pack/unpack routines; ~1.9× GB/s vs SOTA plane-transpose baseline.
 2. More releasing soon.
 
 ## Contact
 
 Available for hire: https://ashtonsix.com
+
+Follow me on X [@ashtonsix](https://x.com/ashtonsix) and LinkedIn [in/ashtonsix](https://linkedin.com/in/ashtonsix).
 
 ## Development Environment
 
