@@ -5,7 +5,8 @@
 ## Projects
 
 1. **[NEON Bytepack](./bytepack/README.md)** — bit pack/unpack routines; ~1.9× GB/s vs SOTA plane-transpose baseline.
-2. More releasing soon.
+1. **[NEON Delta Coding](./delta/README.md)** — delta, delta-of-delta and xor-with-previous decoding; ~1.5–2.2x GB/s vs baseline.
+1. More releasing soon.
 
 ## Contact
 
