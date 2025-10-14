@@ -1,5 +1,5 @@
 /**
- * (c) Daniel Lemire, modified by Ashton Six
+ * Originally authored by Daniel Lemire, modified by Ashton Six
  * Based on: https://github.com/fast-pack/FastPFOR/blob/master/src/simdbitpacking.cpp and
  *           https://github.com/fast-pack/FastPFOR/blob/master/headers/simdbinarypacking.h
  */
