@@ -42,3 +42,7 @@ sudo cp -R /tmp/simde/simde /usr/local/include/
 # Source
 git clone --depth 1 https://github.com/ashtonsix/perf-portfolio.git
 ```
+
+## License
+
+Apache 2.0
