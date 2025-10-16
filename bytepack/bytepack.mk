@@ -10,10 +10,12 @@ CXXFLAGS ?= -std=c++23 -O3 --target=$(TARGET) -mcpu=$(CPU) -I. -DNDEBUG \
             -fno-verbose-asm -fno-rtti -fuse-ld=lld
 LDFLAGS  ?= -fuse-ld=lld -Wl,--build-id=none
 
-OUTDIR  := out
-ASMDIR  := $(OUTDIR)/asm
-MCADIR  := $(OUTDIR)/mca
-SPLITTER := split_cfi.awk
+OUTDIR   := out
+ASMDIR   := $(OUTDIR)/asm
+MCADIR   := $(OUTDIR)/mca
+SPLITTER := ../.common/split_cfi.awk
+
+OUTFILES ?= "pack1 unpack1 pack2 unpack2 pack3 unpack3 pack4 unpack4 pack5 unpack5 pack6 unpack6 pack7 unpack7 pack8 unpack8"
 
 SRC_NEON     := bytepack.cpp
 SRC_BASELINE := bytepack_baseline.cpp
@@ -32,7 +34,7 @@ asm: | $(OUTDIR)
 	mkdir -p "$(ASMDIR)"
 	$(CXX) $(CXXFLAGS) -S -o - $(SRC_NEON) \
 	  | sed -e 's:[[:space:]]*//.*$$::' -e '/^[[:space:]]*$$/d' \
-	  | awk -v outdir="$(ASMDIR)" -f "$(SPLITTER)" -
+	  | awk -v outdir="$(ASMDIR)" -v outfiles=$(OUTFILES) -f "$(SPLITTER)" -
 
 # Run llvm-mca on each .s file
 mca: asm

@@ -1,7 +1,6 @@
 // bytepack_eval.cpp
 
-#include <algorithm>
-#include <chrono>
+#include "../.common/eval.hpp"
 #include <cmath>
 #include <cstdint>
 #include <cstdlib>
@@ -11,7 +10,6 @@
 #include <memory>
 #include <random>
 #include <sched.h>
-#include <thread>
 #include <unistd.h>
 
 // ---- external routines -------------------------------------------------------
@@ -27,16 +25,6 @@ void encodeArray(const uint32_t* in, size_t length_uint32, uint32_t* out, uint32
 const uint32_t* decodeArray(const uint32_t* in, size_t length_uint32, uint32_t* out, uint32_t bit);
 } // namespace BytepackBaseline
 
-// ---- affinity ---------------------------------------------------------------
-static inline void pin_to_cpu0() {
-#if defined(__linux__)
-  cpu_set_t set;
-  CPU_ZERO(&set);
-  CPU_SET(0, &set);
-  (void)sched_setaffinity(0, sizeof(set), &set);
-#endif
-}
-
 // ---- small helpers ----------------------------------------------------------
 template <int K>
 constexpr size_t packed_size_bytes(size_t n_in_bytes) {
@@ -47,45 +35,6 @@ static inline std::string as_gbps(double bytes_per_sec) {
   os << std::fixed << std::setprecision(2) << (bytes_per_sec / 1e9);
   return os.str();
 }
-
-// Simple aligned unique_ptr helper
-template <class T>
-using aligned_uptr = std::unique_ptr<T, void (*)(void*)>;
-
-template <class T>
-static aligned_uptr<T> make_aligned(size_t count, size_t align = 64) {
-  void* p = nullptr;
-  if (posix_memalign(&p, align, count * sizeof(T))) {
-    std::perror("posix_memalign");
-    std::exit(1);
-  }
-  return aligned_uptr<T>(static_cast<T*>(p), std::free);
-}
-
-// ---- Bursty timer: run in small active bursts with sleeps in between --------
-struct Bursty {
-  static constexpr size_t kBurstReps = 200; // active iterations per burst
-  static constexpr int kBurstSleepMs = 5;   // idle between bursts
-
-  template <class F>
-  static std::pair<size_t, double> measure(F&& body, size_t total_reps) {
-    using clock = std::chrono::steady_clock;
-    size_t done = 0;
-    double active_sec = 0.0;
-    while (done < total_reps) {
-      const size_t chunk = std::min(kBurstReps, total_reps - done);
-      const auto t0 = clock::now();
-      for (size_t i = 0; i < chunk; ++i)
-        body();
-      const auto t1 = clock::now();
-      active_sec += std::chrono::duration<double>(t1 - t0).count();
-      done += chunk;
-      if (done < total_reps)
-        std::this_thread::sleep_for(std::chrono::milliseconds(kBurstSleepMs));
-    }
-    return {total_reps, active_sec}; // only active time counts
-  }
-};
 
 // ---- Benchmark for a fixed K ------------------------------------------------
 template <int K>
@@ -107,15 +56,14 @@ struct BenchK {
     const size_t pk32_words = (n_u32 * K + 31) / 32; // round up
 
     // Allocate buffers
-    auto in_b = make_aligned<uint8_t>(n_bytes);
-    auto pk_b = make_aligned<uint8_t>(pk_bytes);
-    auto out_b = make_aligned<uint8_t>(n_bytes);
+    auto in_b = make_buf<uint8_t>(n_bytes, 0);
+    auto pk_b = make_buf<uint8_t>(pk_bytes, 0);
+    auto out_b = make_buf<uint8_t>(n_bytes, 0);
 
-    auto in32 = make_aligned<uint32_t>(n_u32);
-    auto pk32 = make_aligned<uint32_t>(pk32_words);
-    auto out32 = make_aligned<uint32_t>(n_u32);
+    auto in32 = make_buf<uint32_t>(n_u32, 0);
+    auto pk32 = make_buf<uint32_t>(pk32_words, 0);
+    auto out32 = make_buf<uint32_t>(n_u32, 0);
 
-    // Initialize inputs (deterministic)
     std::mt19937_64 rng(0x12345678ULL + K);
     const uint32_t maxv = (K == 8) ? 0xFFu : ((1u << K) - 1u);
     std::uniform_int_distribution<uint32_t> dist(0u, maxv);
@@ -142,13 +90,13 @@ struct BenchK {
 
     // Measurements (bursty; only active time is counted)
     auto [iters_np, secs_np] =
-        Bursty::measure([&] { bytepack::bytepack<K>(in_b.get(), pk_b.get(), n_bytes); }, total_reps);
+        Timer::measure([&] { bytepack::bytepack<K>(in_b.get(), pk_b.get(), n_bytes); }, total_reps, 400);
     auto [iters_nu, secs_nu] =
-        Bursty::measure([&] { bytepack::byteunpack<K>(pk_b.get(), out_b.get(), n_bytes); }, total_reps);
+        Timer::measure([&] { bytepack::byteunpack<K>(pk_b.get(), out_b.get(), n_bytes); }, total_reps, 400);
     auto [iters_bp, secs_bp] =
-        Bursty::measure([&] { BytepackBaseline::encodeArray(in32.get(), n_u32, pk32.get(), K); }, total_reps);
+        Timer::measure([&] { BytepackBaseline::encodeArray(in32.get(), n_u32, pk32.get(), K); }, total_reps, 400);
     auto [iters_bu, secs_bu] =
-        Bursty::measure([&] { BytepackBaseline::decodeArray(pk32.get(), n_u32, out32.get(), K); }, total_reps);
+        Timer::measure([&] { BytepackBaseline::decodeArray(pk32.get(), n_u32, out32.get(), K); }, total_reps, 400);
 
     const double neon_pack_in_bps = (double(n_bytes) * iters_np) / secs_np;
     const double neon_unpack_out_bps = (double(n_bytes) * iters_nu) / secs_nu;

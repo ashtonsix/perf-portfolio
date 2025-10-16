@@ -16,7 +16,8 @@ LDFLAGS  ?= -fuse-ld=lld -Wl,--build-id=none
 OUTDIR   := out
 ASMDIR   := $(OUTDIR)/asm
 MCADIR   := $(OUTDIR)/mca
-SPLITTER := split_delta.awk
+SPLITTER := ../.common/split_cfi.awk
+OUTFILES := "delta_naive_W32 prefix_fastpfor_W32 prefix_naive_W32 prefix_unrolled_W32 prefix_pipelined_W32 delta_transpose_W32 prefix_transpose_W32 deltaOfDelta_naive_W32 prefixOfPrefix_naive_W32 prefixOfPrefix_pipelined_W32 deltaOfDelta_transpose_W32 prefixOfPrefix_transpose_W32 xor_naive_W32 xorInv_naive_W32 xorInv_pipelined_W32 xor_transpose_W32 xorInv_transpose_W32"
 
 SRC_MAIN := delta.c
 SRC_EVAL := delta_eval.cpp
@@ -34,7 +35,7 @@ asm: | $(OUTDIR)
 	mkdir -p "$(ASMDIR)"
 	$(CC) $(CFLAGS) -S -o - $(SRC_MAIN) \
 	  | sed -e 's:[[:space:]]*//.*$$::' -e '/^[[:space:]]*$$/d' \
-	  | awk -v outdir="$(ASMDIR)" -f "$(SPLITTER)" -
+	  | awk -v outdir="$(ASMDIR)" -v outfiles=$(OUTFILES) -f "$(SPLITTER)" -
 
 # Run llvm-mca on each split .s file
 mca:

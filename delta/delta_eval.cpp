@@ -1,15 +1,14 @@
+#include "../.common/eval.hpp"
 #include <algorithm>
-#include <chrono>
 #include <cstdint>
 #include <cstdlib>
 #include <cstring>
 #include <iomanip>
 #include <iostream>
 #include <ostream>
-#include <random>
 #include <span>
+#include <sstream>
 #include <string>
-#include <thread>
 #include <type_traits>
 #include <vector>
 
@@ -17,15 +16,6 @@
 inline constexpr int kLabelWidth = 36;
 inline constexpr int kValueWidth = 17;
 inline constexpr int kTotalReps = 20000;
-
-static std::vector<uint32_t> make_input(size_t n, uint64_t seed) {
-  std::mt19937_64 rng(seed);
-  std::uniform_int_distribution<uint32_t> dist(0u, 0xFFFFFFFFu);
-  std::vector<uint32_t> v(n);
-  for (size_t i = 0; i < n; ++i)
-    v[i] = dist(rng);
-  return v;
-}
 
 template <class T, class MapFn>
 void check(std::span<T> in, std::span<T> out, MapFn map_fn) {
@@ -67,30 +57,6 @@ void check(std::span<T> in, std::span<T> out, MapFn map_fn) {
   }
 }
 
-struct Bursty {
-  static constexpr size_t kBurstReps = 200;
-  static constexpr int kBurstSleepMs = 5;
-
-  template <class F>
-  static std::pair<size_t, double> measure(F&& body, size_t total_reps) {
-    using clock = std::chrono::steady_clock;
-    size_t done = 0;
-    double active_sec = 0.0;
-    while (done < total_reps) {
-      size_t chunk = std::min(kBurstReps, total_reps - done);
-      auto t0 = clock::now();
-      for (size_t i = 0; i < chunk; ++i)
-        body();
-      auto t1 = clock::now();
-      active_sec += std::chrono::duration<double>(t1 - t0).count();
-      done += chunk;
-      if (done < total_reps)
-        std::this_thread::sleep_for(std::chrono::milliseconds(kBurstSleepMs));
-    }
-    return {total_reps, active_sec};
-  }
-};
-
 template <class T, class TestFn>
 double measure(std::span<T> in, TestFn test_fn) {
   std::vector<T> out(in.size());
@@ -98,8 +64,8 @@ double measure(std::span<T> in, TestFn test_fn) {
   test_fn(in.data(), out.data(), in.size()); // Warm-up
 
   auto fn = [&] { test_fn(in.data(), out.data(), in.size()); };
-  auto [n, sec] = Bursty::measure(fn, kTotalReps);
-  double bytes = static_cast<double>(in.size()) * sizeof(T) * kTotalReps;
+  auto [n, sec] = Timer::measure(fn, kTotalReps);
+  double bytes = static_cast<double>(in.size()) * sizeof(T) * n;
   double gbps = bytes / sec / 1e9;
   return gbps;
 }
@@ -152,11 +118,14 @@ using DeltaFunc = void (*)(uint32_t*, uint32_t*, size_t);
 using PrefixFunc = void (*)(uint32_t*, uint32_t*, size_t);
 
 int main() {
+  pin_to_cpu0();
+
   constexpr size_t kWorksetKiB = 4;
   const size_t num_elements = (kWorksetKiB * 1024) / sizeof(uint32_t);
 
   // Prepare data
-  auto input = make_input(num_elements, 0x12345678ULL);
+  auto in = make_buf<uint32_t>(num_elements);
+  std::span<uint32_t> input(in.get(), num_elements);
   std::vector<uint32_t> delta_ref(num_elements);
   std::vector<uint32_t> dt_ref(num_elements);
   std::vector<uint32_t> d2_ref(num_elements);
