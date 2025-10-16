@@ -295,15 +295,14 @@ out[i] = in[i] ^ in[i-1]
 out[i] = out[i-1] ^ in[i]
 ```
 
-XOR-based prefix scans are less receptive to our pipelining optimization than addition-based scans. While ADD and XOR have identical latency and throughput on Graviton4, ADD operations can take advantage of dedicated fast-forward circuits in the execution pipeline, making them less sensitive to dependency chains. XOR lacks these shortcuts.
+XOR-based prefix scans are less receptive to our pipelining optimization than addition-based scans (only yields a 1.5x improvement, 10.8 vs 16.6 GB/s). While ADD and XOR have identical latency and throughput on Graviton4, ADD operations can take advantage of dedicated fast-forward circuits in the execution pipeline, making them less sensitive to dependency chains. XOR lacks these shortcuts.
 
 **Transpose-based alternative:** To address XOR's latency sensitivity, we developed
 a transpose-based algorithm that outperforms Hillis-Steele for the inverse operation.
 This approach:
 
 - Breaks input ordering (outputs appear in transposed order)
-- Improves reverse-direction throughput by 2.0x (21.5 vs 10.8 GB/s)
-- Shows 1.5x improvement for the pipelined approach (16.6 vs 10.8 GB/s)
+- Improves reverse-direction throughput by 2.0x (10.8 vs 21.5 GB/s)
 - May offer more consistent performance across CPU microarchitectures due to reduced dependency on architecture-specific optimizations
 
 We include this variant for completeness, but recommend the pipelined approach for
@@ -497,7 +496,7 @@ Implementation details coming soon.
 | Delta  + 4x4 transpose               | 24.43             | -                 |
 | Prefix + 4x4 transpose               | 21.36             | 2.0x              |
 |                                      |                   |                   |
-| Delta-of-delta   / naive             | 29.59             | 8.1x              |
+| Delta-of-delta   / naive             | 29.59             | -                 |
 | Prefix-of-prefix / naive             | 3.65              | 1.0x              |
 | Prefix-of-prefix / pipelined         | 8.20              | 2.2x              |
 | Delta-of-delta   + 4x4 transpose     | 20.16             | -                 |
@@ -511,8 +510,6 @@ Implementation details coming soon.
 ```
 
 **Reproduction:**
-
-> Share your reproductions and I'll add them here.
 
 Install dependencies per the top-level repository [README](../README.md), then:
 

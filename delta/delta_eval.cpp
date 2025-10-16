@@ -203,7 +203,7 @@ int main() {
   print_decoration(' ');
 
   double prefixOfPrefix_naive_gbps = measure<uint32_t>(input, prefixOfPrefix_naive_W32);
-  print("Delta-of-delta   / naive", measure<uint32_t>(input, deltaOfDelta_naive_W32), prefixOfPrefix_naive_gbps);
+  print("Delta-of-delta   / naive", measure<uint32_t>(input, deltaOfDelta_naive_W32));
   print("Prefix-of-prefix / naive", prefixOfPrefix_naive_gbps, prefixOfPrefix_naive_gbps);
   print("Prefix-of-prefix / pipelined", measure<uint32_t>(input, prefixOfPrefix_pipelined_W32),
         prefixOfPrefix_naive_gbps);
