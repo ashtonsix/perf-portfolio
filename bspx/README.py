@@ -1,19 +1,21 @@
 # %% [markdown]
-# # BSP-inspired bitsets: 46% smaller than Roaring (but probably not faster)
+# # BSP-inspired bitsets: 46% smaller than Roaring
 #
 # > **Scope:** Pre-engineering research measuring compression only. Performance estimated.
 # > **Created by [Ashton Six](https://ashtonsix.com)** (available for hire).
 #
 # ---
 #
-# Bitset performance is typically memory-bound: once main-memory saturates (~6 GB/s) extra compute won’t accelerate AND/OR/XOR. This motivates _operational compression_: keeping sets compressed in memory to stream more values through compute while retaining set algebra speed.
+# **Context:** Search, OLAP databases, and stream analytics (Lucene, Spark, Kylin, Druid, ClickHouse, …) rely on compressed bitsets for fast filtering, joins, set algebra, and counts. Roaring-style bitset implementations dominate, which balance compression with operational speed.
 #
-# We compare Roaring and Judy against Binary Space Partitioning (BSP)-style encoders and two-stage hybrids. **This work measures compression ratios only**—we estimate throughput characteristics through system modeling, but do not implement or benchmark actual codecs.
+# **Problem:** Bitset performance is typically memory-bound—once the memory bus saturates (~6 GB/s), extra compute won't accelerate operations (e.g., AND/OR/XOR). This motivates _operational compression_: keeping sets compressed in memory to stream more data through the CPU while maintaining set algebra speed.
 #
-# **Findings (short):**
+# **Contribution:** We compare Roaring and Judy against Binary Space Partitioning (BSP)-style encoders and two-stage hybrids. **This work measures compression ratios only**—we estimate throughput characteristics through system modeling, but do not implement or benchmark actual codecs.
 #
-# * **BSP dominates compression.** **Left-popcount (LP)** and **median-index (MI)** yield bitsets \~**46% smaller** than the best non-BSP baseline (Roaring+RLE) on aggregate.
-# * **Hybrid policies don’t help compression.** Mixing LP+MI and/or adding preprocessing passes doesn't pay off; control overhead erases gains and adds complexity.
+# **Findings:**
+#
+# * **BSP dominates compression.** **Left-popcount (LP)** and **median-index (MI)** yield bitsets ~**46% smaller** than the best non-BSP baseline (Roaring+RLE) on aggregate.
+# * **Hybrid policies don't help compression.** Mixing LP+MI and/or adding preprocessing passes doesn't pay off; control overhead erases gains and adds complexity.
 # * **Entropy concentrates in the low 8-12 bits.** Two-stage designs can maintain single-stage compression ratios while improving codec practicality.
 #
 # **Outcome:** We identify a promising two-stage architecture:
@@ -22,6 +24,7 @@
 #   * **Stage 2 (low 8-12 bits):** Compression-oriented encoding (LP, MI, or micro-containers)
 #
 # LP/MI offer the best compression; simpler micro-containers (e.g., pickbest) sacrifice ~20% compression but should prove easier to accelerate.
+
 #
 # ---
 #
@@ -84,10 +87,6 @@ df
 
 # %% [markdown]
 # # Background
-#
-# ## Motivation
-#
-# Search, OLAP, and stream analytics rely on compressed bitsets for fast filtering, joins, set algebra, and counts with minimal memory traffic. Roaring-style implementations dominate (Lucene, Spark, Kylin, Druid, ClickHouse, …).
 #
 # ## Prior Art
 #
