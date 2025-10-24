@@ -10,7 +10,7 @@
 #
 # **Problem:** Bitset performance is typically memory-bound—once the memory bus saturates (~6 GB/s), extra compute won't accelerate operations (e.g., AND/OR/XOR). This motivates _operational compression_: keeping sets compressed in memory to stream more data through the CPU while maintaining set algebra speed.
 #
-# **Contribution:** We compare Roaring and Judy against Binary Space Partitioning (BSP)-style encoders and two-stage hybrids. **This work measures compression ratios only**—we estimate throughput characteristics through system modeling, but do not implement or benchmark actual codecs.
+# **Approach:** We compare Roaring and Judy against Binary Space Partitioning (BSP)-style encoders and two-stage hybrids. **This work measures compression ratios only**—we estimate throughput characteristics through system modeling, but do not implement or benchmark actual codecs.
 #
 # **Findings:**
 #
@@ -24,7 +24,6 @@
 #   * **Stage 2 (low 8-12 bits):** Compression-oriented encoding (LP, MI, or micro-containers)
 #
 # LP/MI offer the best compression; simpler micro-containers (e.g., pickbest) sacrifice ~20% compression but should prove easier to accelerate.
-
 #
 # ---
 #
@@ -52,7 +51,7 @@
 # * Some files are exact duplicates, we evaluate the 1570 unique sets.
 
 # %%
-# Imports, constants
+# Imports, constants, report.csv import
 from matplotlib.ticker import FixedLocator, FuncFormatter
 from pathlib import Path
 import bspx_analysis_helpers as bspx
@@ -65,25 +64,14 @@ from IPython.display import display
 PROJECT_ROOT = Path.cwd()
 REPORT_PATH = PROJECT_ROOT / "report.csv"
 
-# %%
-# Load & parse report.csv
-
-# Parses 'k=v|k=v|...' metric columns, drops hash-equal bitsets, and computes derived columns:
-#   file->dataset/bitset
-#   P{span_i}.<metric> -> P{total/avg}.<metric> (stats probe)
 df = bspx.load_report(REPORT_PATH)
-
-print(
-    f"Loaded {len(df):,} rows x {len(df.columns):,} columns across {df['file'].nunique():,} datasets and {df['policy'].nunique():,} policies."
-)
-print("Policies:", df["policy"].unique())
-print("Columns:", list(df.columns))
-
 bitsets_per_dataset = df.groupby("dataset")["bitset"].nunique()
+print(
+    f"Loaded {len(df):,} rows x {len(df.columns):,} columns across {df['file'].nunique():,} datasets and {df['policy'].nunique():,} policies.\n")
 print("Unique bitsets per dataset:")
 print(bitsets_per_dataset)
 
-df
+df.head(3)
 
 # %% [markdown]
 # # Background
@@ -120,23 +108,11 @@ df
 
 def megabit_table(df: pd.DataFrame, policies: list[str], quiet=False) -> pd.DataFrame:
     df_baselines = df[df["policy"].isin(policies)].copy()
-    total_Mb = (
-        df_baselines
-        .groupby("policy")["bits"].sum()
-        .div(1e6)
-    )
-    per_dataset_Mb = (
-        df_baselines
-        .groupby(["policy", "dataset"])["bits"].sum()
-        .div(1e6)
-        .unstack("dataset", fill_value=0)
-    )
-    table = (
-        pd.DataFrame({"total": total_Mb})
-        .reindex(policies)
-        .join(per_dataset_Mb, how="left")
-        .fillna(0)
-    )
+    total_Mb = df_baselines.groupby("policy")["bits"].sum().div(1e6)
+    per_dataset_Mb = df_baselines.groupby(["policy", "dataset"])[
+        "bits"].sum().div(1e6).unstack("dataset", fill_value=0)
+    table = pd.DataFrame({"total": total_Mb}).reindex(
+        policies).join(per_dataset_Mb, how="left").fillna(0)
     assert table.shape[0] == len(policies)
     if not quiet:
         print("Each column shows aggregate megabits across bitsets in a dataset:")
