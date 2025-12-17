@@ -7,6 +7,7 @@
 1. **[NEON Bytepack](./bytepack/README.md)** — bit pack/unpack routines; ~1.9× GB/s vs SOTA plane-transpose baseline.
 1. **[NEON Delta Coding](./delta/README.md)** — delta, delta-of-delta and xor-with-previous decoding; ~1.5–2.2x GB/s vs baseline.
 1. **[BSPX](./bspx/README.ipynb)** — bitset compression scheme with strong performance potential, 46% size reduction vs Roaring+RLE.
+1. **[P4Synth](./p4_synth/README.md)** — boolean function synthesiser with real ISAs; ~1000× search speed vs SAT baseline.
 1. More releasing soon.
 
 ## Contact

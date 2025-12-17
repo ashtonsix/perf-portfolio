@@ -1,0 +1,2090 @@
+; File truncated. Run `make && ./build/p4_synth` to get full content (~280MB).
+
+[g=0 cf=1] 0;
+  <> [x86 x86_BMI AVX512_PRED ARM SVE_PRED NEON NEON_SHA3 SVE2] NPN:0x0000 NP:0x0000 P:0x0000
+
+[g=0 cf=1] 1;
+  <> [x86 x86_BMI AVX512_PRED ARM SVE_PRED NEON NEON_SHA3 SVE2] NPN:0x0000 NP:0xffff P:0xffff
+
+[g=0 cf=1] x0;
+  <x0=a> [x86 x86_BMI AVX512_PRED ARM SVE_PRED NEON NEON_SHA3 SVE2] NPN:0x00ff NP:0x00ff P:0xaaaa
+
+[g=1 cf=5] g0 = BCAX(x0, x1, x2);
+  <x0=a x1=0 x2=b> [NEON_SHA3 SVE2] NPN:0x0ff0 NP:0x0ff0 P:0x0ff0
+  <x0=a x1=b x2=a> [NEON_SHA3 SVE2] NPN:0x000f NP:0x000f P:0x8888
+  <x0=1 x1=a x2=b> [NEON_SHA3 SVE2] NPN:0x0ff0 NP:0x0ff0 P:0x9999
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x99aa
+  <x0=a x1=b x2=1> [NEON_SHA3 SVE2] NPN:0x000f NP:0x0fff P:0xaaff
+
+[g=1 cf=3] g0 = MUX(x0, x1, x2);
+  <x0=a x1=0 x2=b> [NEON NEON_SHA3 SVE2] NPN:0x000f NP:0x000f P:0x00aa
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0xaacc
+  <x0=a x1=1 x2=b> [NEON NEON_SHA3 SVE2] NPN:0x000f NP:0x0fff P:0xeeee
+
+[g=1 cf=3] g0 = XOR3(x0, x1, x2);
+  <x0=a x1=0 x2=b> [NEON_SHA3 SVE2] NPN:0x0ff0 NP:0x0ff0 P:0x0ff0
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x3cc3 NP:0x3cc3 P:0x9696
+  <x0=a x1=1 x2=b> [NEON_SHA3 SVE2] NPN:0x0ff0 NP:0x0ff0 P:0x9999
+
+[g=1 cf=2] g0 = XNOR(x0, x1);
+  <x0=0 x1=a> [AVX512_PRED ARM NEON_SHA3 SVE2] NPN:0x00ff NP:0x00ff P:0x00ff
+  <x0=a x1=b> [AVX512_PRED ARM NEON_SHA3 SVE2] NPN:0x0ff0 NP:0x0ff0 P:0x9999
+
+[g=1 cf=2] g0 = NAND(x0, x1);
+  <x0=a x1=a> [SVE_PRED] NPN:0x00ff NP:0x00ff P:0x00ff
+  <x0=a x1=b> [SVE_PRED] NPN:0x000f NP:0x0fff P:0x0fff
+
+[g=1 cf=2] g0 = NOR(x0, x1);
+  <x0=a x1=b> [SVE_PRED] NPN:0x000f NP:0x000f P:0x000f
+  <x0=0 x1=a> [SVE_PRED] NPN:0x00ff NP:0x00ff P:0x00ff
+
+[g=1 cf=2] g0 = XOR(x0, x1);
+  <x0=1 x1=a> [x86 x86_BMI AVX512_PRED ARM SVE_PRED NEON NEON_SHA3 SVE2] NPN:0x00ff NP:0x00ff P:0x00ff
+  <x0=a x1=b> [x86 x86_BMI AVX512_PRED ARM SVE_PRED NEON NEON_SHA3 SVE2] NPN:0x0ff0 NP:0x0ff0 P:0x0ff0
+
+[g=1 cf=1] g0 = NOT(x0);
+  <x0=a> [x86 x86_BMI AVX512_PRED ARM SVE_PRED NEON NEON_SHA3 SVE2] NPN:0x00ff NP:0x00ff P:0x00ff
+
+[g=1 cf=1] g0 = ANDN(x0, x1);
+  <x0=a x1=b> [x86_BMI AVX512_PRED ARM SVE_PRED NEON NEON_SHA3 SVE2] NPN:0x000f NP:0x000f P:0x00aa
+
+[g=1 cf=1] g0 = ORN(x0, x1);
+  <x0=a x1=b> [ARM SVE_PRED NEON NEON_SHA3] NPN:0x000f NP:0x0fff P:0xaaff
+
+[g=1 cf=1] g0 = OR(x0, x1);
+  <x0=a x1=b> [x86 x86_BMI AVX512_PRED ARM SVE_PRED NEON NEON_SHA3 SVE2] NPN:0x000f NP:0x0fff P:0xeeee
+
+[g=1 cf=1] g0 = AND(x0, x1);
+  <x0=a x1=b> [x86 x86_BMI AVX512_PRED ARM SVE_PRED NEON NEON_SHA3 SVE2] NPN:0x000f NP:0x000f P:0x8888
+
+[g=2 cf=21] g0 = BCAX(x0, x1, x2); g1 = MUX(g0, x3, x4);
+  <x0=a x1=b x2=c x3=0 x4=d> [NEON_SHA3 SVE2] NPN:0x001e NP:0x001e P:0x08a2
+  <x0=1 x1=a x2=b x3=0 x4=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x0aa0
+  <x0=a x1=b x2=a x3=0 x4=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x0aaa
+  <x0=a x1=b x2=a x3=c x4=0> [NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x8080
+  <x0=1 x1=a x2=b x3=c x4=0> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x8282
+  <x0=a x1=b x2=c x3=d x4=0> [NEON_SHA3 SVE2] NPN:0x001e NP:0x001e P:0x8288
+  <x0=a x1=b x2=c x3=d x4=c> [NEON_SHA3 SVE2] NPN:0x011f NP:0x011f P:0x88e8
+  <x0=a x1=0 x2=b x3=b x4=c> [NEON_SHA3 SVE2] NPN:0x033f NP:0x033f P:0x88ee
+  <x0=a x1=b x2=c x3=d x4=b> [NEON_SHA3 SVE2] NPN:0x036f NP:0x036f P:0x8aec
+  <x0=a x1=b x2=c x3=a x4=d> [NEON_SHA3 SVE2] NPN:0x036f NP:0x036f P:0xa8ce
+  <x0=1 x1=a x2=b x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x069f NP:0x069f P:0xacca
+  <x0=a x1=b x2=a x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x01ef NP:0x01ef P:0xaccc
+  <x0=a x1=b x2=c x3=d x4=a> [NEON_SHA3 SVE2] NPN:0x036f NP:0x036f P:0xace8
+  <x0=a x1=b x2=c x3=d x4=1> [NEON_SHA3 SVE2] NPN:0x001e NP:0x1eff P:0xaefb
+  <x0=a x1=0 x2=b x3=1 x4=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xaffa
+  <x0=a x1=b x2=a x3=c x4=1> [NEON_SHA3 SVE2] NPN:0x0003 NP:0x3fff P:0xafff
+  <x0=a x1=b x2=c x3=b x4=d> [NEON_SHA3 SVE2] NPN:0x036f NP:0x036f P:0xe8ac
+  <x0=a x1=0 x2=b x3=c x4=a> [NEON_SHA3 SVE2] NPN:0x033f NP:0x033f P:0xe8e8
+  <x0=a x1=b x2=c x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x011f NP:0x077f P:0xe8ee
+  <x0=1 x1=a x2=b x3=1 x4=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xebeb
+  <x0=a x1=b x2=c x3=1 x4=d> [NEON_SHA3 SVE2] NPN:0x001e NP:0x1eff P:0xebee
+
+[g=2 cf=18] g0 = MUX(x2, x3, x4); g1 = MUX(g0, x0, x1);
+  <x0=0 x1=a x2=b x3=1 x4=c> [NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x000a
+  <x0=0 x1=a x2=b x3=c x4=d> [NEON NEON_SHA3 SVE2] NPN:0x001b NP:0x001b P:0x028a
+  <x0=a x1=0 x2=b x3=c x4=d> [NEON NEON_SHA3 SVE2] NPN:0x001b NP:0x001b P:0x88a0
+  <x0=a x1=b x2=c x3=b x4=d> [NEON NEON_SHA3 SVE2] NPN:0x012f NP:0x012f P:0x88ac
+  <x0=a x1=b x2=c x3=b x4=a> [NEON NEON_SHA3 SVE2] NPN:0x033f NP:0x033f P:0x88ee
+  <x0=a x1=0 x2=b x3=1 x4=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0xa8a8
+  <x0=a x1=b x2=c x3=d x4=b> [NEON NEON_SHA3 SVE2] NPN:0x012f NP:0x012f P:0xa8c8
+  <x0=a x1=b x2=a x3=c x4=d> [NEON NEON_SHA3 SVE2] NPN:0x035f NP:0x035f P:0xa8ec
+  <x0=a x1=b x2=c x3=1 x4=d> [NEON NEON_SHA3 SVE2] NPN:0x01ef NP:0x01ef P:0xaaac
+  <x0=a x1=1 x2=b x3=1 x4=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaaf
+  <x0=a x1=b x2=c x3=0 x4=d> [NEON NEON_SHA3 SVE2] NPN:0x01ef NP:0x01ef P:0xaaca
+  <x0=1 x1=a x2=b x3=0 x4=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaee
+  <x0=a x1=1 x2=b x3=c x4=d> [NEON NEON_SHA3 SVE2] NPN:0x001b NP:0x1bff P:0xabef
+  <x0=a x1=b x2=c x3=a x4=b> [NEON NEON_SHA3 SVE2] NPN:0x033f NP:0x033f P:0xe8e8
+  <x0=a x1=b x2=c x3=a x4=d> [NEON NEON_SHA3 SVE2] NPN:0x012f NP:0x07bf P:0xeaec
+  <x0=1 x1=a x2=b x3=c x4=d> [NEON NEON_SHA3 SVE2] NPN:0x001b NP:0x1bff P:0xeefa
+  <x0=a x1=1 x2=b x3=0 x4=c> [NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x3fff P:0xeeff
+  <x0=1 x1=a x2=b x3=1 x4=c> [NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x3fff P:0xfefe
+
+[g=2 cf=17] g0 = MUX(x0, x1, x2); g1 = XOR3(x3, x4, g0);
+  <x0=a x1=b x2=c x3=0 x4=b> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x003c
+  <x0=a x1=b x2=c x3=0 x4=1> [NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x03cf
+  <x0=a x1=1 x2=b x3=c x4=0> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x03fc
+  <x0=a x1=b x2=c x3=0 x4=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x0aa0
+  <x0=a x1=b x2=c x3=a x4=0> [NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x0afa
+  <x0=a x1=b x2=c x3=0 x4=d> [NEON_SHA3 SVE2] NPN:0x1be4 NP:0x1be4 P:0x1be4
+  <x0=a x1=0 x2=b x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x1ee1 NP:0x1ee1 P:0x2dd2
+  <x0=a x1=b x2=c x3=c x4=a> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x8282
+  <x0=a x1=b x2=c x3=d x4=a> [NEON_SHA3 SVE2] NPN:0x1be4 NP:0x1be4 P:0x87b4
+  <x0=a x1=b x2=c x3=a x4=1> [NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x88bb
+  <x0=a x1=b x2=c x3=d x4=c> [NEON_SHA3 SVE2] NPN:0x06f9 NP:0x06f9 P:0x96aa
+  <x0=a x1=1 x2=b x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x1ee1 NP:0x1ee1 P:0x9996
+  <x0=a x1=b x2=c x3=d x4=1> [NEON_SHA3 SVE2] NPN:0x1be4 NP:0x1be4 P:0x99a5
+  <x0=a x1=b x2=c x3=c x4=1> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0x99ff
+  <x0=a x1=b x2=c x3=d x4=b> [NEON_SHA3 SVE2] NPN:0x06f9 NP:0x06f9 P:0xa99a
+  <x0=a x1=1 x2=b x3=c x4=1> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0xa9a9
+  <x0=a x1=b x2=c x3=1 x4=b> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xebeb
+
+[g=2 cf=15] g0 = BCAX(x0, x1, x2); g1 = BCAX(g0, x3, x4);
+  <x0=a x1=b x2=a x3=c x4=0> [NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x0088
+  <x0=1 x1=a x2=b x3=c x4=0> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x0099
+  <x0=a x1=b x2=c x3=d x4=0> [NEON_SHA3 SVE2] NPN:0x001e NP:0x001e P:0x009a
+  <x0=a x1=b x2=c x3=0 x4=b> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x03fc
+  <x0=a x1=b x2=c x3=0 x4=d> [NEON_SHA3 SVE2] NPN:0x1ee1 NP:0x1ee1 P:0x2dd2
+  <x0=1 x1=a x2=b x3=0 x4=c> [NEON_SHA3 SVE2] NPN:0x3cc3 NP:0x3cc3 P:0x3cc3
+  <x0=a x1=b x2=c x3=0 x4=a> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x3ccc
+  <x0=a x1=b x2=1 x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x07f8 NP:0x07f8 P:0x99a9
+  <x0=1 x1=a x2=b x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x06f9 NP:0x06f9 P:0x9aa9
+  <x0=a x1=b x2=a x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x01fe NP:0x01fe P:0x9aaa
+  <x0=a x1=b x2=c x3=d x4=a> [NEON_SHA3 SVE2] NPN:0x03de NP:0x03de P:0x9ab8
+  <x0=a x1=0 x2=b x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x06f9 NP:0x06f9 P:0xa99a
+  <x0=1 x1=0 x2=a x3=b x4=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0xa9a9
+  <x0=a x1=b x2=a x3=c x4=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xeaea
+  <x0=a x1=b x2=c x3=d x4=d> [NEON_SHA3 SVE2] NPN:0x001e NP:0x1eff P:0xebee
+
+[g=2 cf=14] g0 = MUX(x0, x1, x2); g1 = BCAX(x3, g0, x4);
+  <x0=a x1=0 x2=b x3=c x4=c> [NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x0088
+  <x0=a x1=0 x2=b x3=1 x4=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x0af5
+  <x0=a x1=0 x2=b x3=c x4=1> [NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0x0aff
+  <x0=a x1=0 x2=b x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x07f8 NP:0x07f8 P:0x2df0
+  <x0=a x1=b x2=c x3=d x4=d> [NEON_SHA3 SVE2] NPN:0x001b NP:0x001b P:0x88a0
+  <x0=a x1=b x2=c x3=1 x4=a> [NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x88bb
+  <x0=a x1=b x2=c x3=d x4=a> [NEON_SHA3 SVE2] NPN:0x03dd NP:0x03dd P:0x8ada
+  <x0=a x1=b x2=c x3=1 x4=d> [NEON_SHA3 SVE2] NPN:0x1be4 NP:0x1be4 P:0x99a5
+  <x0=a x1=b x2=c x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x01fe NP:0x01fe P:0x9aaa
+  <x0=a x1=b x2=c x3=b x4=b> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0xa8a8
+  <x0=a x1=1 x2=b x3=1 x4=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0xa9a9
+  <x0=a x1=1 x2=b x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x01fe NP:0x01fe P:0xa9aa
+  <x0=a x1=b x2=c x3=d x4=1> [NEON_SHA3 SVE2] NPN:0x001b NP:0x1bff P:0xacff
+  <x0=a x1=1 x2=b x3=c x4=1> [NEON_SHA3 SVE2] NPN:0x0003 NP:0x3fff P:0xeeff
+
+[g=2 cf=13] g0 = MUX(x2, x3, x4); g1 = BCAX(g0, x0, x1);
+  <x0=0 x1=a x2=b x3=a x4=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x003c
+  <x0=a x1=0 x2=b x3=c x4=a> [NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x0088
+  <x0=a x1=0 x2=b x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x001b NP:0x001b P:0x00ac
+  <x0=a x1=0 x2=b x3=1 x4=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x00ee
+  <x0=0 x1=a x2=b x3=1 x4=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x03fc
+  <x0=0 x1=a x2=a x3=b x4=c> [NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x0afa
+  <x0=0 x1=a x2=b x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x1be4 NP:0x1be4 P:0x1be4
+  <x0=a x1=b x2=b x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x03dd NP:0x03dd P:0x98ba
+  <x0=a x1=b x2=c x3=1 x4=d> [NEON_SHA3 SVE2] NPN:0x07f8 NP:0x07f8 P:0x999a
+  <x0=a x1=b x2=c x3=d x4=a> [NEON_SHA3 SVE2] NPN:0x01fe NP:0x01fe P:0x9aaa
+  <x0=a x1=b x2=c x3=0 x4=d> [NEON_SHA3 SVE2] NPN:0x01fe NP:0x01fe P:0xa9aa
+  <x0=a x1=a x2=b x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x001b NP:0x1bff P:0xeefa
+  <x0=a x1=a x2=b x3=1 x4=c> [NEON_SHA3 SVE2] NPN:0x0003 NP:0x3fff P:0xfefe
+
+[g=2 cf=13] g0 = BCAX(x0, x1, x2); g1 = BCAX(x3, g0, x4);
+  <x0=a x1=0 x2=b x3=c x4=b> [NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x0afa
+  <x0=a x1=0 x2=b x3=c x4=1> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0x3cff
+  <x0=a x1=0 x2=b x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x06f9 NP:0x06f9 P:0x69aa
+  <x0=a x1=b x2=a x3=c x4=c> [NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x8080
+  <x0=1 x1=a x2=b x3=c x4=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x8282
+  <x0=a x1=b x2=c x3=d x4=d> [NEON_SHA3 SVE2] NPN:0x001e NP:0x001e P:0x8288
+  <x0=a x1=b x2=c x3=1 x4=a> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x8787
+  <x0=a x1=b x2=a x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x07f8 NP:0x07f8 P:0x87f0
+  <x0=a x1=b x2=a x3=c x4=1> [NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0x88ff
+  <x0=a x1=b x2=c x3=1 x4=d> [NEON_SHA3 SVE2] NPN:0x1ee1 NP:0x1ee1 P:0x9699
+  <x0=1 x1=a x2=b x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x06f9 NP:0x06f9 P:0x96aa
+  <x0=a x1=b x2=1 x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x01fe NP:0x01fe P:0x9aaa
+  <x0=a x1=b x2=c x3=d x4=1> [NEON_SHA3 SVE2] NPN:0x001e NP:0x1eff P:0x9aff
+
+[g=2 cf=12] g0 = XOR3(x0, x1, x2); g1 = MUX(g0, x3, x4);
+  <x0=1 x1=a x2=b x3=0 x4=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x0aa0
+  <x0=a x1=b x2=c x3=0 x4=d> [NEON_SHA3 SVE2] NPN:0x0069 NP:0x0069 P:0x2882
+  <x0=a x1=b x2=c x3=d x4=0> [NEON_SHA3 SVE2] NPN:0x0069 NP:0x0069 P:0x8228
+  <x0=a x1=1 x2=b x3=c x4=a> [NEON_SHA3 SVE2] NPN:0x033f NP:0x033f P:0x88ee
+  <x0=a x1=b x2=c x3=d x4=c> [NEON_SHA3 SVE2] NPN:0x066f NP:0x066f P:0x8ee8
+  <x0=a x1=0 x2=b x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x069f NP:0x069f P:0xacca
+  <x0=0 x1=a x2=b x3=1 x4=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xaffa
+  <x0=a x1=b x2=c x3=d x4=1> [NEON_SHA3 SVE2] NPN:0x0069 NP:0x69ff P:0xbeeb
+  <x0=a x1=b x2=c x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x066f NP:0x066f P:0xe88e
+  <x0=1 x1=a x2=b x3=a x4=c> [NEON_SHA3 SVE2] NPN:0x033f NP:0x033f P:0xe8e8
+  <x0=a x1=b x2=c x3=1 x4=d> [NEON_SHA3 SVE2] NPN:0x0069 NP:0x69ff P:0xebbe
+  <x0=0 x1=a x2=b x3=c x4=1> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xebeb
+
+[g=2 cf=11] g0 = BCAX(x0, x1, x2); g1 = BCAX(x3, x4, g0);
+  <x0=a x1=0 x2=b x3=c x4=a> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x03fc
+  <x0=a x1=0 x2=b x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x1ee1 NP:0x1ee1 P:0x2dd2
+  <x0=1 x1=a x2=b x3=b x4=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x8787
+  <x0=a x1=b x2=a x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x0356 NP:0x0356 P:0x8788
+  <x0=a x1=b x2=c x3=b x4=d> [NEON_SHA3 SVE2] NPN:0x1be4 NP:0x1be4 P:0x87b4
+  <x0=a x1=b x2=1 x3=b x4=c> [NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x88bb
+  <x0=1 x1=a x2=b x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x1ee1 NP:0x1ee1 P:0x9699
+  <x0=a x1=b x2=c x3=a x4=d> [NEON_SHA3 SVE2] NPN:0x06f9 NP:0x06f9 P:0x96aa
+  <x0=a x1=b x2=1 x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x0356 NP:0x1eee P:0x9acf
+  <x0=a x1=b x2=c x3=d x4=b> [NEON_SHA3 SVE2] NPN:0x06f9 NP:0x06f9 P:0xa99a
+  <x0=a x1=b x2=c x3=d x4=c> [NEON_SHA3 SVE2] NPN:0x0356 NP:0x1eee P:0xa9fc
+
+[g=2 cf=9] g0 = XOR3(x0, x1, x2); g1 = BCAX(x3, x4, g0);
+  <x0=a x1=b x2=0 x3=c x4=a> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x03fc
+  <x0=1 x1=a x2=0 x3=b x4=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x0af5
+  <x0=0 x1=a x2=b x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x1ee1 NP:0x1ee1 P:0x2dd2
+  <x0=0 x1=a x2=b x3=a x4=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x3ccc
+  <x0=a x1=b x2=c x3=a x4=d> [NEON_SHA3 SVE2] NPN:0x1ee1 NP:0x1ee1 P:0x8778
+  <x0=a x1=b x2=1 x3=b x4=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x8787
+  <x0=1 x1=a x2=b x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x1ee1 NP:0x1ee1 P:0x9699
+  <x0=a x1=b x2=c x3=d x4=b> [NEON_SHA3 SVE2] NPN:0x1ee1 NP:0x1ee1 P:0x9996
+  <x0=a x1=1 x2=b x3=c x4=a> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0xa9a9
+
+[g=2 cf=8] g0 = XOR3(x2, x3, x4); g1 = BCAX(g0, x0, x1);
+  <x0=a x1=0 x2=b x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x0069 NP:0x0069 P:0x0096
+  <x0=0 x1=a x2=1 x3=b x4=c> [NEON_SHA3 SVE2] NPN:0x3cc3 NP:0x3cc3 P:0x3cc3
+  <x0=0 x1=a x2=b x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x6996 NP:0x6996 P:0x6996
+  <x0=a x1=b x2=c x3=d x4=1> [NEON_SHA3 SVE2] NPN:0x06f9 NP:0x06f9 P:0x9aa9
+  <x0=a x1=b x2=0 x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x06f9 NP:0x06f9 P:0xa99a
+  <x0=a x1=b x2=a x3=1 x4=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0xa9a9
+  <x0=a x1=a x2=b x3=0 x4=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xaffa
+  <x0=a x1=a x2=b x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x0069 NP:0x69ff P:0xebbe
+
+[g=2 cf=8] g0 = MUX(x2, x3, x4); g1 = BCAX(x0, x1, g0);
+  <x0=a x1=b x2=c x3=0 x4=d> [NEON_SHA3 SVE2] NPN:0x0356 NP:0x0356 P:0x0ac6
+  <x0=a x1=b x2=c x3=a x4=d> [NEON_SHA3 SVE2] NPN:0x0359 NP:0x0359 P:0x88b4
+  <x0=a x1=b x2=b x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x06f6 NP:0x06f6 P:0x8bb8
+  <x0=a x1=b x2=a x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x06f6 NP:0x06f6 P:0x99f0
+  <x0=a x1=b x2=c x3=d x4=a> [NEON_SHA3 SVE2] NPN:0x0359 NP:0x0359 P:0x9ac0
+  <x0=a x1=b x2=c x3=d x4=b> [NEON_SHA3 SVE2] NPN:0x0359 NP:0x1bd7 P:0x9afc
+  <x0=a x1=b x2=c x3=1 x4=d> [NEON_SHA3 SVE2] NPN:0x0356 NP:0x1eee P:0xa9fc
+  <x0=a x1=b x2=c x3=b x4=d> [NEON_SHA3 SVE2] NPN:0x0359 NP:0x1bd7 P:0xebd8
+
+[g=2 cf=8] g0 = MUX(x0, x1, x2); g1 = XNOR(x3, g0);
+  <x0=a x1=b x2=c x3=0> [NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x03cf
+  <x0=a x1=0 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x0af5
+  <x0=a x1=b x2=a x3=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x8787
+  <x0=a x1=b x2=c x3=a> [NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x88bb
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x1be4 NP:0x1be4 P:0x99a5
+  <x0=a x1=b x2=c x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0x99ff
+  <x0=a x1=1 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0xa9a9
+  <x0=a x1=b x2=c x3=b> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xebeb
+
+[g=2 cf=7] g0 = MUX(x0, x1, x2); g1 = XOR(x3, g0);
+  <x0=a x1=b x2=c x3=b> [NEON NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x003c
+  <x0=a x1=b x2=c x3=1> [NEON NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x03cf
+  <x0=a x1=1 x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x03fc
+  <x0=a x1=b x2=c x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x0aa0
+  <x0=a x1=b x2=c x3=a> [NEON NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x0afa
+  <x0=a x1=b x2=c x3=d> [NEON NEON_SHA3 SVE2] NPN:0x1be4 NP:0x1be4 P:0x1be4
+  <x0=a x1=0 x2=b x3=c> [NEON] NPN:0x03fc NP:0x03fc P:0x99aa
+
+[g=2 cf=7] g0 = XOR3(x2, x3, x4); g1 = BCAX(x0, g0, x1);
+  <x0=1 x1=a x2=0 x3=b x4=c> [NEON_SHA3 SVE2] NPN:0x3cc3 NP:0x3cc3 P:0x3cc3
+  <x0=a x1=b x2=0 x3=1 x4=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x3ccc
+  <x0=a x1=b x2=c x3=d x4=0> [NEON_SHA3 SVE2] NPN:0x06f9 NP:0x06f9 P:0x69aa
+  <x0=a x1=a x2=b x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x0069 NP:0x0069 P:0x8228
+  <x0=1 x1=a x2=b x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x6996 NP:0x6996 P:0x9669
+  <x0=a x1=b x2=1 x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x06f9 NP:0x06f9 P:0x96aa
+  <x0=a x1=1 x2=b x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x0069 NP:0x69ff P:0x96ff
+
+[g=2 cf=7] g0 = MUX(x2, x0, x3); g1 = MUX(g0, x0, x1);
+  <x0=0 x1=a x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+  <x0=a x1=0 x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0xa8a8
+  <x0=a x1=b x2=c x3=b> [NEON NEON_SHA3 SVE2] NPN:0x033f NP:0x033f P:0xe8e8
+  <x0=a x1=b x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xeaea
+  <x0=a x1=b x2=c x3=d> [NEON NEON_SHA3 SVE2] NPN:0x012f NP:0x07bf P:0xeaec
+  <x0=a x1=1 x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x3fff P:0xeeff
+  <x0=1 x1=a x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x3fff P:0xfefe
+
+[g=2 cf=7] g0 = MUX(x2, x3, x0); g1 = MUX(g0, x0, x1);
+  <x0=0 x1=a x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x0aaa
+  <x0=a x1=0 x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+  <x0=a x1=b x2=c x3=b> [NEON NEON_SHA3 SVE2] NPN:0x033f NP:0x033f P:0x88ee
+  <x0=a x1=b x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaee
+  <x0=a x1=b x2=c x3=d> [NEON NEON_SHA3 SVE2] NPN:0x012f NP:0x07bf P:0xacee
+  <x0=a x1=1 x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x3fff P:0xafff
+  <x0=1 x1=a x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x3fff P:0xeeff
+
+[g=2 cf=7] g0 = BCAX(x1, x3, x2); g1 = BCAX(g0, x0, x3);
+  <x0=a x1=b x2=c x3=0> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x003c
+  <x0=0 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x03fc
+  <x0=a x1=b x2=1 x3=c> [NEON_SHA3 SVE2] NPN:0x03c3 NP:0x03c3 P:0x8899
+  <x0=a x1=b x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+  <x0=a x1=1 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x88bb
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x03de NP:0x06f3 P:0x89ba
+  <x0=a x1=b x2=c x3=a> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xaffa
+
+[g=2 cf=7] g0 = MUX(x1, x2, x0); g1 = MUX(g0, x3, x0);
+  <x0=a x1=b x2=c x3=0> [NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x0088
+  <x0=0 x1=a x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x8080
+  <x0=a x1=b x2=c x3=b> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0xa8a8
+  <x0=a x1=b x2=c x3=d> [NEON NEON_SHA3 SVE2] NPN:0x012f NP:0x012f P:0xa8c8
+  <x0=1 x1=a x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaee
+  <x0=a x1=b x2=c x3=c> [NEON NEON_SHA3 SVE2] NPN:0x033f NP:0x033f P:0xe8e8
+  <x0=a x1=b x2=c x3=1> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xeaea
+
+[g=2 cf=7] g0 = BCAX(x0, x2, x3); g1 = BCAX(x1, g0, x0);
+  <x0=a x1=b x2=0 x3=c> [NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x0afa
+  <x0=a x1=b x2=c x3=0> [NEON_SHA3 SVE2] NPN:0x03c3 NP:0x0ff3 P:0x3cfc
+  <x0=a x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x8282
+  <x0=a x1=1 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x8787
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x03de NP:0x03de P:0x87aa
+  <x0=1 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0x99ff
+  <x0=a x1=b x2=c x3=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaee
+
+[g=2 cf=7] g0 = XOR(x2, x3); g1 = MUX(g0, x0, x1);
+  <x0=a x1=0 x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x0aa0
+  <x0=0 x1=a x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x8282
+  <x0=a x1=b x2=c x3=a> [NEON NEON_SHA3 SVE2] NPN:0x033f NP:0x033f P:0x88ee
+  <x0=a x1=b x2=c x3=d> [NEON NEON_SHA3 SVE2] NPN:0x069f NP:0x069f P:0xacca
+  <x0=1 x1=a x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xaffa
+  <x0=a x1=b x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x033f NP:0x033f P:0xe8e8
+  <x0=a x1=1 x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xebeb
+
+[g=2 cf=7] g0 = BCAX(x2, x3, x4); g1 = MUX(x0, x1, g0);
+  <x0=a x1=b x2=c x3=0 x4=d> [NEON_SHA3 SVE2] NPN:0x06f6 NP:0x06f6 P:0x8bb8
+  <x0=a x1=b x2=c x3=b x4=1> [NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaaf
+  <x0=a x1=b x2=c x3=d x4=c> [NEON_SHA3 SVE2] NPN:0x01ab NP:0x01ab P:0xaac0
+  <x0=a x1=b x2=1 x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x06f6 NP:0x06f6 P:0xaac3
+  <x0=a x1=b x2=b x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x03de NP:0x03de P:0xaac6
+  <x0=a x1=b x2=c x3=d x4=1> [NEON_SHA3 SVE2] NPN:0x01ab NP:0x07f7 P:0xaacf
+  <x0=a x1=a x2=b x3=0 x4=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xaffa
+
+[g=2 cf=7] g0 = XNOR(x0, x1); g1 = MUX(g0, x2, x3);
+  <x0=a x1=b x2=0 x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x0aa0
+  <x0=a x1=b x2=c x3=0> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x8282
+  <x0=a x1=b x2=c x3=a> [NEON_SHA3 SVE2] NPN:0x033f NP:0x033f P:0x88ee
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x069f NP:0x069f P:0xacca
+  <x0=a x1=b x2=c x3=1> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xaffa
+  <x0=a x1=b x2=a x3=c> [NEON_SHA3 SVE2] NPN:0x033f NP:0x033f P:0xe8e8
+  <x0=a x1=b x2=1 x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xebeb
+
+[g=2 cf=6] g0 = BCAX(x0, x1, x2); g1 = ANDN(x3, g0);
+  <x0=a x1=b x2=1 x3=c> [NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x0088
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x001e NP:0x001e P:0x08a2
+  <x0=1 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x0aa0
+  <x0=a x1=b x2=a x3=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x0aaa
+  <x0=a x1=b x2=c x3=1> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x0af5
+  <x0=a x1=0 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x8282
+
+[g=2 cf=6] g0 = BCAX(x1, x3, x2); g1 = BCAX(g0, x3, x0);
+  <x0=0 x1=1 x2=a x3=b> [NEON_SHA3 SVE2] NPN:0x000f NP:0x000f P:0x000f
+  <x0=0 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x003c
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x06f9 NP:0x06f9 P:0xa99a
+  <x0=a x1=b x2=1 x3=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0xa9a9
+  <x0=a x1=b x2=c x3=a> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xaffa
+  <x0=1 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xebeb
+
+[g=2 cf=6] g0 = BCAX(x3, x1, x2); g1 = MUX(x0, g0, x3);
+  <x0=a x1=b x2=0 x3=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x0aaa
+  <x0=a x1=0 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x3ccc
+  <x0=a x1=b x2=c x3=a> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x8282
+  <x0=a x1=b x2=c x3=1> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0x99ff
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x03de NP:0x03de P:0x9af0
+  <x0=a x1=b x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xeaea
+
+[g=2 cf=6] g0 = BCAX(x2, x1, x3); g1 = MUX(x0, x1, g0);
+  <x0=a x1=0 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x003c
+  <x0=a x1=b x2=c x3=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0xa8a8
+  <x0=a x1=b x2=1 x3=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0xa9a9
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x03de NP:0x06f3 P:0xa9ac
+  <x0=a x1=b x2=c x3=1> [NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaaf
+  <x0=a x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xaffa
+
+[g=2 cf=6] g0 = MUX(x2, x3, x1); g1 = BCAX(g0, x1, x0);
+  <x0=0 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x0088
+  <x0=a x1=0 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x3ccc
+  <x0=a x1=b x2=c x3=a> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x01fe NP:0x01fe P:0x9aaa
+  <x0=1 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x0003 NP:0x3fff P:0xafff
+  <x0=a x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xeaea
+
+[g=2 cf=6] g0 = MUX(x0, x2, x3); g1 = BCAX(g0, x1, x0);
+  <x0=a x1=0 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x0afa
+  <x0=a x1=b x2=c x3=0> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+  <x0=a x1=b x2=1 x3=c> [NEON_SHA3 SVE2] NPN:0x03c3 NP:0x03c3 P:0x9898
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x03dd NP:0x03dd P:0x98ba
+  <x0=a x1=b x2=c x3=1> [NEON_SHA3 SVE2] NPN:0x03c3 NP:0x0ff3 P:0x99bb
+  <x0=a x1=b x2=0 x3=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaee
+
+[g=2 cf=6] g0 = BCAX(x0, x1, x2); g1 = MUX(x3, g0, x4);
+  <x0=a x1=0 x2=b x3=c x4=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x0aa0
+  <x0=a x1=0 x2=1 x3=b x4=c> [NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x0afa
+  <x0=a x1=0 x2=b x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x06f6 NP:0x06f6 P:0x2ee2
+  <x0=a x1=b x2=a x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x01ab NP:0x01ab P:0x88f0
+  <x0=1 x1=a x2=b x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x06f6 NP:0x06f6 P:0x99f0
+  <x0=a x1=b x2=1 x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x01ab NP:0x07f7 P:0xacfc
+
+[g=2 cf=6] g0 = BCAX(x1, x2, x3); g1 = ORN(x0, g0);
+  <x0=0 x1=a x2=b x3=c> [NEON_SHA3] NPN:0x03fc NP:0x03fc P:0x0af5
+  <x0=a x1=b x2=c x3=1> [NEON_SHA3] NPN:0x003f NP:0x03ff P:0xaaee
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3] NPN:0x001e NP:0x1eff P:0xaefb
+  <x0=a x1=1 x2=b x3=c> [NEON_SHA3] NPN:0x003c NP:0x3cff P:0xaffa
+  <x0=a x1=b x2=c x3=b> [NEON_SHA3] NPN:0x0003 NP:0x3fff P:0xafff
+  <x0=a x1=b x2=0 x3=c> [NEON_SHA3] NPN:0x003c NP:0x3cff P:0xebeb
+
+[g=2 cf=6] g0 = MUX(x3, x1, x2); g1 = BCAX(x0, g0, x3);
+  <x0=a x1=0 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x03c3 NP:0x03c3 P:0x03cc
+  <x0=a x1=b x2=1 x3=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+  <x0=1 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x88bb
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x03dd NP:0x03dd P:0x8ada
+  <x0=a x1=1 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaee
+  <x0=a x1=b x2=0 x3=c> [NEON_SHA3 SVE2] NPN:0x03c3 NP:0x0ff3 P:0xaff0
+
+[g=2 cf=6] g0 = MUX(x0, x3, x1); g1 = BCAX(x3, g0, x2);
+  <x0=a x1=b x2=0 x3=c> [NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x000a
+  <x0=a x1=b x2=c x3=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0xa8a8
+  <x0=a x1=b x2=c x3=1> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0xa9a9
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x01fe NP:0x01fe P:0xa9aa
+  <x0=a x1=b x2=a x3=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaee
+  <x0=a x1=b x2=1 x3=c> [NEON_SHA3 SVE2] NPN:0x0003 NP:0x3fff P:0xeeff
+
+[g=2 cf=6] g0 = MUX(x0, x3, x1); g1 = BCAX(x2, g0, x3);
+  <x0=a x1=b x2=c x3=0> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+  <x0=a x1=b x2=c x3=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0xa8a8
+  <x0=a x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x03c3 NP:0x0ff3 P:0xaff0
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x01ae NP:0x07fb P:0xeada
+  <x0=a x1=b x2=1 x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xebeb
+  <x0=a x1=b x2=c x3=1> [NEON_SHA3 SVE2] NPN:0x0003 NP:0x3fff P:0xeeff
+
+[g=2 cf=6] g0 = XOR3(x0, x2, x3); g1 = BCAX(x0, g0, x1);
+  <x0=a x1=0 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x0aa0
+  <x0=a x1=1 x2=0 x3=b> [NEON_SHA3 SVE2] NPN:0x000f NP:0x0fff P:0x0fff
+  <x0=a x1=b x2=0 x3=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x3ccc
+  <x0=a x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x8282
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x06f9 NP:0x06f9 P:0x96aa
+  <x0=a x1=1 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0x99ff
+
+[g=2 cf=6] g0 = XOR3(x1, x2, x3); g1 = BCAX(g0, x1, x0);
+  <x0=0 x1=a x2=1 x3=b> [NEON_SHA3 SVE2] NPN:0x000f NP:0x000f P:0x000f
+  <x0=0 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x003c
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x06f9 NP:0x06f9 P:0xa99a
+  <x0=a x1=b x2=1 x3=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0xa9a9
+  <x0=a x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xaffa
+  <x0=1 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xebeb
+
+[g=2 cf=6] g0 = BCAX(x0, x1, x2); g1 = XOR3(x3, x4, g0);
+  <x0=a x1=b x2=c x3=0 x4=d> [NEON_SHA3 SVE2] NPN:0x1ee1 NP:0x1ee1 P:0x2dd2
+  <x0=1 x1=a x2=b x3=0 x4=c> [NEON_SHA3 SVE2] NPN:0x3cc3 NP:0x3cc3 P:0x3cc3
+  <x0=a x1=0 x2=b x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x6996 NP:0x6996 P:0x6996
+  <x0=1 x1=a x2=b x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x6996 NP:0x6996 P:0x9669
+  <x0=a x1=b x2=c x3=b x4=d> [NEON_SHA3 SVE2] NPN:0x1ee1 NP:0x1ee1 P:0x9996
+  <x0=a x1=b x2=c x3=b x4=1> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0xa9a9
+
+[g=2 cf=6] g0 = BCAX(x0, x1, x2); g1 = BCAX(x0, g0, x3);
+  <x0=a x1=b x2=c x3=0> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x0aa0
+  <x0=a x1=0 x2=b x3=1> [NEON_SHA3 SVE2] NPN:0x000f NP:0x0fff P:0x0fff
+  <x0=a x1=b x2=0 x3=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x3ccc
+  <x0=a x1=b x2=c x3=a> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x8282
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x06f9 NP:0x06f9 P:0x96aa
+  <x0=a x1=b x2=c x3=1> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0x99ff
+
+[g=2 cf=6] g0 = MUX(x0, x3, x1); g1 = MUX(g0, x2, x3);
+  <x0=a x1=b x2=0 x3=c> [NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x000a
+  <x0=a x1=b x2=c x3=0> [NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x0088
+  <x0=a x1=a x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+  <x0=a x1=b x2=c x3=d> [NEON NEON_SHA3 SVE2] NPN:0x012f NP:0x012f P:0x88ac
+  <x0=a x1=b x2=c x3=1> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaaf
+  <x0=a x1=b x2=1 x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaee
+
+[g=2 cf=6] g0 = MUX(x2, x0, x3); g1 = BCAX(g0, x1, x0);
+  <x0=0 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x000a
+  <x0=a x1=0 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x003c
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x01ae NP:0x01ae P:0x889a
+  <x0=a x1=b x2=c x3=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+  <x0=1 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaaf
+  <x0=a x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaee
+
+[g=2 cf=5] g0 = XNOR(x2, x3); g1 = BCAX(g0, x0, x1);
+  <x0=a x1=0 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x0099
+  <x0=0 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x3cc3 NP:0x3cc3 P:0x3cc3
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x06f9 NP:0x06f9 P:0x9aa9
+  <x0=a x1=b x2=c x3=0> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0xa9a9
+  <x0=a x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xebeb
+
+[g=2 cf=5] g0 = BCAX(x1, x2, x0); g1 = MUX(g0, x0, x3);
+  <x0=a x1=b x2=c x3=0> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+  <x0=a x1=b x2=c x3=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaee
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x011f NP:0x077f P:0xe8ee
+  <x0=a x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xeaea
+  <x0=a x1=b x2=c x3=1> [NEON_SHA3 SVE2] NPN:0x0003 NP:0x3fff P:0xeeff
+
+[g=2 cf=5] g0 = MUX(x3, x0, x1); g1 = MUX(g0, x2, x3);
+  <x0=a x1=0 x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+  <x0=1 x1=a x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0xa8a8
+  <x0=a x1=b x2=c x3=d> [NEON NEON_SHA3 SVE2] NPN:0x035f NP:0x035f P:0xa8ec
+  <x0=a x1=1 x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaee
+  <x0=0 x1=a x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xeaea
+
+[g=2 cf=5] g0 = ORN(x2, x3); g1 = MUX(g0, x0, x1);
+  <x0=0 x1=a x2=b x3=c> [NEON NEON_SHA3] NPN:0x0003 NP:0x0003 P:0x0088
+  <x0=a x1=0 x2=b x3=c> [NEON NEON_SHA3] NPN:0x003f NP:0x003f P:0x88aa
+  <x0=a x1=b x2=c x3=d> [NEON NEON_SHA3] NPN:0x01ef NP:0x01ef P:0xaaca
+  <x0=a x1=1 x2=b x3=c> [NEON NEON_SHA3] NPN:0x003f NP:0x03ff P:0xaaee
+  <x0=1 x1=a x2=b x3=c> [NEON NEON_SHA3] NPN:0x0003 NP:0x3fff P:0xeeff
+
+[g=2 cf=5] g0 = XOR3(x0, x1, x2); g1 = MUX(g0, x3, x0);
+  <x0=0 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x0aa0
+  <x0=a x1=b x2=1 x3=c> [NEON_SHA3 SVE2] NPN:0x033f NP:0x033f P:0x88ee
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x066f NP:0x066f P:0x8ee8
+  <x0=1 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xaffa
+  <x0=a x1=0 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x033f NP:0x033f P:0xe8e8
+
+[g=2 cf=5] g0 = BCAX(x2, x3, x1); g1 = BCAX(g0, x1, x0);
+  <x0=0 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x000a
+  <x0=a x1=b x2=a x3=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0xa8a8
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x01fe NP:0x01fe P:0xa9aa
+  <x0=a x1=b x2=c x3=a> [NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaee
+  <x0=1 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x0003 NP:0x3fff P:0xeeff
+
+[g=2 cf=5] g0 = MUX(x0, x1, x2); g1 = MUX(x3, g0, x4);
+  <x0=a x1=0 x2=b x3=c x4=d> [NEON NEON_SHA3 SVE2] NPN:0x01ab NP:0x01ab P:0x0aca
+  <x0=a x1=0 x2=b x3=c x4=a> [NEON NEON_SHA3 SVE2] NPN:0x03c3 NP:0x03c3 P:0x0af0
+  <x0=a x1=0 x2=b x3=b x4=c> [NEON NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x0afa
+  <x0=a x1=b x2=c x3=d x4=a> [NEON NEON_SHA3 SVE2] NPN:0x03dd NP:0x03dd P:0xacf0
+  <x0=a x1=1 x2=b x3=c x4=d> [NEON NEON_SHA3 SVE2] NPN:0x01ab NP:0x07f7 P:0xeee2
+
+[g=2 cf=5] g0 = MUX(x0, x1, x2); g1 = BCAX(g0, x3, x2);
+  <x0=a x1=b x2=0 x3=c> [NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x0088
+  <x0=a x1=b x2=c x3=0> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x0aa0
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x01ae NP:0x01ae P:0x98a8
+  <x0=a x1=b x2=1 x3=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaee
+  <x0=a x1=b x2=c x3=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xeaea
+
+[g=2 cf=5] g0 = MUX(x2, x0, x1); g1 = MUX(g0, x2, x3);
+  <x0=0 x1=a x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+  <x0=a x1=1 x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0xa8a8
+  <x0=a x1=b x2=c x3=d> [NEON NEON_SHA3 SVE2] NPN:0x035f NP:0x035f P:0xa8ec
+  <x0=1 x1=a x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaee
+  <x0=a x1=0 x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xeaea
+
+[g=2 cf=5] g0 = BCAX(x0, x1, x2); g1 = XNOR(x3, g0);
+  <x0=a x1=b x2=c x3=0> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x0af5
+  <x0=a x1=0 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x3cc3 NP:0x3cc3 P:0x3cc3
+  <x0=a x1=b x2=a x3=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x8787
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x1ee1 NP:0x1ee1 P:0x9699
+  <x0=a x1=b x2=c x3=b> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0xa9a9
+
+[g=2 cf=5] g0 = MUX(x3, x0, x1); g1 = MUX(x2, g0, x3);
+  <x0=0 x1=a x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x03c3 NP:0x03c3 P:0x0af0
+  <x0=a x1=0 x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+  <x0=a x1=b x2=c x3=d> [NEON NEON_SHA3 SVE2] NPN:0x03dd NP:0x03dd P:0xacf0
+  <x0=a x1=1 x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x03c3 NP:0x0ff3 P:0xaff0
+  <x0=1 x1=a x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xeaea
+
+[g=2 cf=5] g0 = BCAX(x0, x2, x3); g1 = MUX(g0, x0, x1);
+  <x0=a x1=0 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x8282
+  <x0=a x1=b x2=0 x3=c> [NEON_SHA3 SVE2] NPN:0x033f NP:0x033f P:0x88ee
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x036f NP:0x036f P:0xa8ce
+  <x0=a x1=b x2=c x3=0> [NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaee
+  <x0=1 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xebeb
+
+[g=2 cf=5] g0 = XOR3(x0, x1, x2); g1 = MUX(x2, g0, x3);
+  <x0=a x1=0 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x0afa
+  <x0=0 x1=a x2=b x3=1> [NEON_SHA3 SVE2] NPN:0x000f NP:0x0fff P:0x0fff
+  <x0=a x1=b x2=c x3=0> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x8282
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x06f6 NP:0x06f6 P:0x99f0
+  <x0=a x1=b x2=c x3=1> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0x99ff
+
+[g=2 cf=5] g0 = BCAX(x1, x2, x0); g1 = MUX(x0, g0, x3);
+  <x0=a x1=b x2=c x3=0> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+  <x0=a x1=b x2=c x3=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaee
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x01ab NP:0x07f7 P:0xacfc
+  <x0=a x1=b x2=c x3=b> [NEON_SHA3 SVE2] NPN:0x03c3 NP:0x0ff3 P:0xaff0
+  <x0=a x1=b x2=c x3=1> [NEON_SHA3 SVE2] NPN:0x0003 NP:0x3fff P:0xafff
+
+[g=2 cf=5] g0 = BCAX(x3, x0, x1); g1 = MUX(x3, g0, x2);
+  <x0=a x1=0 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x0afa
+  <x0=0 x1=a x2=1 x3=b> [NEON_SHA3 SVE2] NPN:0x000f NP:0x0fff P:0x0fff
+  <x0=a x1=b x2=0 x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x8282
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x06f6 NP:0x06f6 P:0x99f0
+  <x0=a x1=b x2=1 x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0x99ff
+
+[g=2 cf=5] g0 = BCAX(x0, x3, x1); g1 = BCAX(x3, x2, g0);
+  <x0=a x1=b x2=0 x3=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x03fc
+  <x0=a x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x8282
+  <x0=1 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x8787
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x1be4 NP:0x1be4 P:0x87b4
+  <x0=a x1=1 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x88bb
+
+[g=2 cf=5] g0 = XOR3(x1, x2, x3); g1 = MUX(x1, x0, g0);
+  <x0=0 x1=a x2=1 x3=b> [NEON_SHA3 SVE2] NPN:0x000f NP:0x000f P:0x000f
+  <x0=0 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x003c
+  <x0=a x1=b x2=1 x3=c> [NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x88bb
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x06f6 NP:0x06f6 P:0x8bb8
+  <x0=1 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xaffa
+
+[g=2 cf=5] g0 = XOR3(x0, x1, x3); g1 = MUX(g0, x3, x2);
+  <x0=a x1=b x2=c x3=0> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x8282
+  <x0=0 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x033f NP:0x033f P:0x88ee
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x066f NP:0x066f P:0xe88e
+  <x0=a x1=1 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x033f NP:0x033f P:0xe8e8
+  <x0=a x1=b x2=1 x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xebeb
+
+[g=2 cf=5] g0 = BCAX(x0, x1, x2); g1 = ORN(g0, x3);
+  <x0=a x1=0 x2=b x3=c> [NEON_SHA3] NPN:0x003c NP:0x3cff P:0x3cff
+  <x0=a x1=b x2=a x3=c> [NEON_SHA3] NPN:0x003f NP:0x03ff P:0x88ff
+  <x0=1 x1=a x2=b x3=c> [NEON_SHA3] NPN:0x003c NP:0x3cff P:0x99ff
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3] NPN:0x001e NP:0x1eff P:0x9aff
+  <x0=a x1=b x2=1 x3=c> [NEON_SHA3] NPN:0x0003 NP:0x3fff P:0xafff
+
+[g=2 cf=5] g0 = ANDN(x0, x1); g1 = BCAX(x2, g0, x3);
+  <x0=a x1=b x2=c x3=c> [NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x0088
+  <x0=a x1=b x2=c x3=b> [NEON_SHA3 SVE2] NPN:0x03c3 NP:0x03c3 P:0x03cc
+  <x0=a x1=b x2=1 x3=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x0af5
+  <x0=a x1=b x2=c x3=1> [NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0x0aff
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x07f8 NP:0x07f8 P:0x2df0
+
+[g=2 cf=5] g0 = MUX(x2, x3, x0); g1 = BCAX(x1, g0, x0);
+  <x0=0 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x0aaa
+  <x0=a x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+  <x0=a x1=1 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0x99ff
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x01ae NP:0x07fb P:0x9afa
+  <x0=1 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x0003 NP:0x3fff P:0xafff
+
+[g=2 cf=5] g0 = BCAX(x2, x3, x0); g1 = MUX(x0, x1, g0);
+  <x0=a x1=0 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x000a
+  <x0=a x1=b x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x01ab NP:0x01ab P:0x88b8
+  <x0=a x1=b x2=c x3=b> [NEON_SHA3 SVE2] NPN:0x03c3 NP:0x03c3 P:0x9898
+  <x0=a x1=1 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaee
+
+[g=2 cf=5] g0 = MUX(x1, x2, x3); g1 = ANDN(x0, g0);
+  <x0=a x1=b x2=1 x3=c> [NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x000a
+  <x0=a x1=b x2=c x3=d> [NEON NEON_SHA3 SVE2] NPN:0x001b NP:0x001b P:0x028a
+  <x0=1 x1=a x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x03cf
+  <x0=a x1=b x2=c x3=b> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x0aaa
+  <x0=a x1=b x2=0 x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+
+[g=2 cf=5] g0 = BCAX(x0, x2, x1); g1 = MUX(g0, x3, x2);
+  <x0=a x1=b x2=0 x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x0aa0
+  <x0=a x1=1 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+  <x0=1 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x033f NP:0x033f P:0x88ee
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x036f NP:0x036f P:0x8aec
+  <x0=a x1=b x2=c x3=1> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xaffa
+
+[g=2 cf=5] g0 = MUX(x1, x3, x2); g1 = MUX(x3, x0, g0);
+  <x0=0 x1=a x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x000a
+  <x0=a x1=b x2=a x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+  <x0=a x1=b x2=c x3=d> [NEON NEON_SHA3 SVE2] NPN:0x01ab NP:0x01ab P:0x88b8
+  <x0=a x1=a x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x03c3 NP:0x03c3 P:0x9898
+  <x0=1 x1=a x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaee
+
+[g=2 cf=5] g0 = BCAX(x2, x3, x0); g1 = BCAX(g0, x1, x0);
+  <x0=0 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x000a
+  <x0=a x1=b x2=a x3=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x01ab NP:0x01ab P:0x88b8
+  <x0=a x1=b x2=c x3=a> [NEON_SHA3 SVE2] NPN:0x03c3 NP:0x03c3 P:0x9898
+  <x0=a x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaee
+
+[g=2 cf=5] g0 = MUX(x1, x2, x3); g1 = MUX(x0, x3, g0);
+  <x0=a x1=b x2=c x3=0> [NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x0088
+  <x0=a x1=b x2=c x3=d> [NEON NEON_SHA3 SVE2] NPN:0x01ef NP:0x01ef P:0xaaca
+  <x0=a x1=b x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaee
+  <x0=a x1=b x2=c x3=a> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xeaea
+  <x0=a x1=b x2=c x3=1> [NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x3fff P:0xeeff
+
+[g=2 cf=5] g0 = BCAX(x0, x1, x2); g1 = AND(x3, g0);
+  <x0=a x1=0 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x0aa0
+  <x0=a x1=b x2=a x3=c> [NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x8080
+  <x0=1 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x8282
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x001e NP:0x001e P:0x8288
+  <x0=a x1=b x2=c x3=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+
+[g=2 cf=5] g0 = MUX(x1, x2, x3); g1 = XOR3(x0, x1, g0);
+  <x0=0 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x0afa
+  <x0=a x1=b x2=c x3=a> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x8282
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x1be4 NP:0x1be4 P:0x87b4
+  <x0=1 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x88bb
+  <x0=a x1=b x2=a x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xaffa
+
+[g=2 cf=5] g0 = BCAX(x2, x0, x1); g1 = BCAX(x3, x2, g0);
+  <x0=0 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x03fc
+  <x0=a x1=0 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x0afa
+  <x0=a x1=b x2=c x3=1> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x8787
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x1be4 NP:0x1be4 P:0x87b4
+  <x0=a x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xaffa
+
+[g=2 cf=5] g0 = MUX(x1, x0, x2); g1 = MUX(x3, g0, x0);
+  <x0=0 x1=a x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x0088
+  <x0=a x1=b x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+  <x0=a x1=b x2=c x3=a> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0xa8a8
+  <x0=a x1=b x2=c x3=d> [NEON NEON_SHA3 SVE2] NPN:0x01ef NP:0x01ef P:0xaaca
+  <x0=1 x1=a x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x3fff P:0xeeff
+
+[g=2 cf=5] g0 = MUX(x1, x2, x3); g1 = BCAX(x3, g0, x0);
+  <x0=0 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x0088
+  <x0=a x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x01fe NP:0x01fe P:0x9aaa
+  <x0=1 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x0003 NP:0x3fff P:0xafff
+  <x0=a x1=b x2=a x3=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xeaea
+
+[g=2 cf=5] g0 = BCAX(x0, x3, x1); g1 = MUX(g0, x3, x2);
+  <x0=a x1=b x2=c x3=0> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x8282
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x036f NP:0x036f P:0xe8ac
+  <x0=1 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x033f NP:0x033f P:0xe8e8
+  <x0=a x1=1 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xeaea
+  <x0=a x1=b x2=1 x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xebeb
+
+[g=2 cf=5] g0 = MUX(x1, x2, x3); g1 = MUX(x3, g0, x0);
+  <x0=0 x1=a x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+  <x0=a x1=b x2=a x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaee
+  <x0=a x1=b x2=c x3=d> [NEON NEON_SHA3 SVE2] NPN:0x01ab NP:0x07f7 P:0xacfc
+  <x0=a x1=a x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x03c3 NP:0x0ff3 P:0xaff0
+  <x0=1 x1=a x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x3fff P:0xafff
+
+[g=2 cf=5] g0 = BCAX(x1, x2, x0); g1 = MUX(g0, x3, x0);
+  <x0=a x1=b x2=c x3=0> [NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x0088
+  <x0=a x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x011f NP:0x011f P:0x88e8
+  <x0=a x1=b x2=c x3=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0xa8a8
+  <x0=a x1=b x2=c x3=1> [NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaee
+
+[g=2 cf=5] g0 = MUX(x0, x2, x3); g1 = MUX(x1, x0, g0);
+  <x0=a x1=b x2=0 x3=c> [NEON NEON_SHA3 SVE2] NPN:0x03c3 NP:0x03c3 P:0x9898
+  <x0=a x1=b x2=c x3=0> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0xa8a8
+  <x0=a x1=b x2=c x3=d> [NEON NEON_SHA3 SVE2] NPN:0x03dd NP:0x03dd P:0xaad8
+  <x0=a x1=b x2=c x3=1> [NEON NEON_SHA3 SVE2] NPN:0x03c3 NP:0x0ff3 P:0xaadd
+  <x0=a x1=b x2=1 x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaee
+
+[g=2 cf=5] g0 = XOR3(x0, x2, x3); g1 = MUX(x1, g0, x0);
+  <x0=0 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x0aa0
+  <x0=a x1=b x2=0 x3=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x3ccc
+  <x0=a x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x8282
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x06f9 NP:0x06f9 P:0x96aa
+  <x0=1 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0x99ff
+
+[g=2 cf=5] g0 = OR(x2, x3); g1 = MUX(g0, x0, x1);
+  <x0=0 x1=a x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x000a
+  <x0=a x1=0 x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0xa8a8
+  <x0=a x1=b x2=c x3=d> [NEON NEON_SHA3 SVE2] NPN:0x01ef NP:0x01ef P:0xaaac
+  <x0=a x1=1 x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaaf
+  <x0=1 x1=a x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x3fff P:0xfefe
+
+[g=2 cf=5] g0 = XOR3(x0, x1, x3); g1 = MUX(x2, x3, g0);
+  <x0=a x1=b x2=c x3=0> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x003c
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x06f9 NP:0x06f9 P:0xa99a
+  <x0=a x1=1 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0xa9a9
+  <x0=a x1=b x2=c x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xaffa
+  <x0=a x1=b x2=c x3=1> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xebeb
+
+[g=2 cf=5] g0 = AND(x0, x1); g1 = MUX(g0, x2, x3);
+  <x0=a x1=b x2=0 x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x0aaa
+  <x0=a x1=b x2=c x3=0> [NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x8080
+  <x0=a x1=b x2=c x3=d> [NEON NEON_SHA3 SVE2] NPN:0x01ef NP:0x01ef P:0xaccc
+  <x0=a x1=b x2=c x3=1> [NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x3fff P:0xafff
+  <x0=a x1=b x2=1 x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xeaea
+
+[g=2 cf=5] g0 = MUX(x0, x3, x1); g1 = BCAX(x3, x2, g0);
+  <x0=a x1=b x2=0 x3=1> [NEON_SHA3 SVE2] NPN:0x000f NP:0x000f P:0x000f
+  <x0=a x1=b x2=0 x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x003c
+  <x0=a x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x8282
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x0359 NP:0x0359 P:0x88b4
+  <x0=a x1=b x2=c x3=1> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0xa9a9
+
+[g=2 cf=5] g0 = BCAX(x1, x2, x3); g1 = ANDN(g0, x0);
+  <x0=a x1=b x2=0 x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x003c
+  <x0=a x1=b x2=c x3=b> [NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x0088
+  <x0=a x1=1 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x0099
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x001e NP:0x001e P:0x009a
+  <x0=a x1=b x2=c x3=1> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x00af
+
+[g=2 cf=5] g0 = ORN(x0, x1); g1 = BCAX(g0, x2, x3);
+  <x0=a x1=b x2=c x3=0> [NEON_SHA3] NPN:0x003f NP:0x003f P:0x00af
+  <x0=a x1=b x2=0 x3=c> [NEON_SHA3] NPN:0x03fc NP:0x03fc P:0x0af5
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3] NPN:0x07f8 NP:0x07f8 P:0x99a9
+  <x0=a x1=b x2=c x3=b> [NEON_SHA3] NPN:0x03c3 NP:0x0ff3 P:0x99bb
+  <x0=a x1=b x2=c x3=c> [NEON_SHA3] NPN:0x0003 NP:0x3fff P:0xeeff
+
+[g=2 cf=5] g0 = BCAX(x1, x3, x2); g1 = MUX(x3, x0, g0);
+  <x0=0 x1=1 x2=a x3=b> [NEON_SHA3 SVE2] NPN:0x000f NP:0x000f P:0x000f
+  <x0=0 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x003c
+  <x0=a x1=1 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x88bb
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x06f6 NP:0x06f6 P:0x8bb8
+  <x0=1 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xaffa
+
+[g=2 cf=5] g0 = ANDN(x0, x1); g1 = MUX(g0, x2, x3);
+  <x0=a x1=b x2=c x3=0> [NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x0088
+  <x0=a x1=b x2=0 x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+  <x0=a x1=b x2=c x3=d> [NEON NEON_SHA3 SVE2] NPN:0x01ef NP:0x01ef P:0xaaca
+  <x0=a x1=b x2=1 x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaee
+  <x0=a x1=b x2=c x3=1> [NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x3fff P:0xeeff
+
+[g=2 cf=5] g0 = BCAX(x0, x1, x2); g1 = OR(x3, g0);
+  <x0=a x1=b x2=c x3=b> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xaffa
+  <x0=a x1=b x2=a x3=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xeaea
+  <x0=1 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xebeb
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x001e NP:0x1eff P:0xebee
+  <x0=a x1=b x2=1 x3=c> [NEON_SHA3 SVE2] NPN:0x0003 NP:0x3fff P:0xeeff
+
+[g=2 cf=5] g0 = BCAX(x2, x0, x1); g1 = MUX(g0, x3, x2);
+  <x0=a x1=b x2=c x3=0> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x0aa0
+  <x0=a x1=0 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0xa8a8
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x036f NP:0x036f P:0xace8
+  <x0=a x1=b x2=1 x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xaffa
+  <x0=0 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x033f NP:0x033f P:0xe8e8
+
+[g=2 cf=4] g0 = BCAX(x2, x3, x1); g1 = MUX(x0, x1, g0);
+  <x0=a x1=0 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x000a
+  <x0=a x1=b x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0xa8a8
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x01fe NP:0x01fe P:0xa9aa
+  <x0=a x1=1 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x0003 NP:0x3fff P:0xeeff
+
+[g=2 cf=4] g0 = BCAX(x1, x2, x3); g1 = MUX(x0, g0, x3);
+  <x0=a x1=b x2=c x3=0> [NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x0088
+  <x0=a x1=b x2=c x3=a> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x01fe NP:0x01fe P:0x9aaa
+  <x0=a x1=b x2=c x3=1> [NEON_SHA3 SVE2] NPN:0x0003 NP:0x3fff P:0xafff
+
+[g=2 cf=4] g0 = ANDN(x2, x3); g1 = BCAX(x0, x1, g0);
+  <x0=a x1=b x2=c x3=b> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x003c
+  <x0=a x1=b x2=a x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x0aa0
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x0356 NP:0x0356 P:0x0ac6
+  <x0=a x1=b x2=c x3=a> [NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x0afa
+
+[g=2 cf=4] g0 = XOR3(x2, x3, x4); g1 = MUX(x0, x1, g0);
+  <x0=a x1=b x2=c x3=d x4=0> [NEON_SHA3 SVE2] NPN:0x06f6 NP:0x06f6 P:0x8bb8
+  <x0=a x1=b x2=1 x3=b x4=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0xa9a9
+  <x0=a x1=b x2=c x3=d x4=1> [NEON_SHA3 SVE2] NPN:0x06f6 NP:0x06f6 P:0xaac3
+  <x0=a x1=a x2=b x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x0069 NP:0x69ff P:0xebbe
+
+[g=2 cf=4] g0 = MUX(x0, x1, x3); g1 = XOR3(x2, x3, g0);
+  <x0=a x1=b x2=0 x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x0aa0
+  <x0=a x1=b x2=c x3=0> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x3ccc
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x06f9 NP:0x06f9 P:0x96aa
+  <x0=a x1=b x2=1 x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0x99ff
+
+[g=2 cf=4] g0 = BCAX(x0, x1, x3); g1 = BCAX(x2, g0, x3);
+  <x0=a x1=b x2=c x3=0> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x01ab NP:0x07f7 P:0xacfc
+  <x0=a x1=b x2=c x3=a> [NEON_SHA3 SVE2] NPN:0x03c3 NP:0x0ff3 P:0xaff0
+  <x0=a x1=b x2=c x3=1> [NEON_SHA3 SVE2] NPN:0x0003 NP:0x3fff P:0xafff
+
+[g=2 cf=4] g0 = MUX(x0, x3, x1); g1 = XOR3(x2, x3, g0);
+  <x0=a x1=b x2=0 x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x003c
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x06f9 NP:0x06f9 P:0xa99a
+  <x0=a x1=b x2=c x3=1> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0xa9a9
+  <x0=a x1=b x2=1 x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xebeb
+
+[g=2 cf=4] g0 = BCAX(x0, x1, x2); g1 = XOR(x3, g0);
+  <x0=a x1=b x2=c x3=b> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x03fc
+  <x0=a x1=b x2=c x3=1> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x0af5
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x1ee1 NP:0x1ee1 P:0x2dd2
+  <x0=a x1=b x2=a x3=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x3ccc
+
+[g=2 cf=4] g0 = XOR(x2, x3); g1 = BCAX(x0, g0, x1);
+  <x0=a x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x0aa0
+  <x0=a x1=b x2=1 x3=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x3ccc
+  <x0=a x1=1 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0x3cff
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x06f9 NP:0x06f9 P:0x69aa
+
+[g=2 cf=4] g0 = OR(x0, x1); g1 = BCAX(g0, x2, x3);
+  <x0=a x1=b x2=c x3=0> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x00ee
+  <x0=a x1=b x2=0 x3=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x03fc
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x07f8 NP:0x07f8 P:0x999a
+  <x0=a x1=b x2=c x3=c> [NEON_SHA3 SVE2] NPN:0x0003 NP:0x3fff P:0xfefe
+
+[g=2 cf=4] g0 = BCAX(x0, x3, x1); g1 = BCAX(x2, g0, x3);
+  <x0=a x1=b x2=c x3=0> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x8282
+  <x0=a x1=b x2=1 x3=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0xa9a9
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x03de NP:0x06f3 P:0xa9cc
+  <x0=a x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x03c3 NP:0x0ff3 P:0xaff0
+
+[g=2 cf=4] g0 = AND(x0, x1); g1 = BCAX(g0, x2, x3);
+  <x0=a x1=b x2=c x3=0> [NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x0088
+  <x0=a x1=b x2=0 x3=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x3ccc
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x01fe NP:0x01fe P:0x9aaa
+  <x0=a x1=b x2=c x3=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xeaea
+
+[g=2 cf=4] g0 = MUX(x2, x0, x3); g1 = BCAX(g0, x0, x1);
+  <x0=a x1=0 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x000a
+  <x0=a x1=b x2=c x3=b> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0xa8a8
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x01fe NP:0x01fe P:0xa9aa
+  <x0=a x1=1 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x0003 NP:0x3fff P:0xeeff
+
+[g=2 cf=4] g0 = MUX(x0, x1, x2); g1 = AND(x3, g0);
+  <x0=a x1=0 x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x0088
+  <x0=a x1=b x2=a x3=c> [NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x8080
+  <x0=a x1=b x2=c x3=d> [NEON NEON_SHA3 SVE2] NPN:0x001b NP:0x001b P:0x88a0
+  <x0=a x1=1 x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0xa8a8
+
+[g=2 cf=4] g0 = XOR3(x0, x1, x2); g1 = BCAX(g0, x3, x2);
+  <x0=a x1=b x2=0 x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x003c
+  <x0=1 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x88bb
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x06f6 NP:0x06f6 P:0x8bb8
+  <x0=a x1=b x2=1 x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xaffa
+
+[g=2 cf=4] g0 = OR(x2, x3); g1 = BCAX(x0, g0, x1);
+  <x0=a x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0xa8a8
+  <x0=1 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0xa9a9
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x01fe NP:0x01fe P:0xa9aa
+  <x0=a x1=1 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x0003 NP:0x3fff P:0xeeff
+
+[g=2 cf=4] g0 = ANDN(x0, x1); g1 = XOR3(x2, x3, g0);
+  <x0=a x1=b x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x03fc
+  <x0=a x1=b x2=1 x3=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x0af5
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x1ee1 NP:0x1ee1 P:0x2dd2
+  <x0=a x1=b x2=c x3=a> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x3ccc
+
+[g=2 cf=4] g0 = MUX(x2, x3, x1); g1 = MUX(x1, x0, g0);
+  <x0=0 x1=a x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x0088
+  <x0=a x1=b x2=a x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0xa8a8
+  <x0=a x1=b x2=c x3=d> [NEON NEON_SHA3 SVE2] NPN:0x01ab NP:0x01ab P:0xaac0
+  <x0=1 x1=a x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xeaea
+
+[g=2 cf=4] g0 = XOR3(x0, x1, x2); g1 = ORN(x3, g0);
+  <x0=a x1=b x2=c x3=0> [NEON_SHA3] NPN:0x3cc3 NP:0x3cc3 P:0x3cc3
+  <x0=1 x1=a x2=b x3=c> [NEON_SHA3] NPN:0x003c NP:0x3cff P:0xaffa
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3] NPN:0x0069 NP:0x69ff P:0xbeeb
+  <x0=a x1=b x2=c x3=a> [NEON_SHA3] NPN:0x003c NP:0x3cff P:0xebeb
+
+[g=2 cf=4] g0 = MUX(x2, x3, x1); g1 = BCAX(x0, x1, g0);
+  <x0=a x1=0 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x3ccc
+  <x0=1 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0x99ff
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x0359 NP:0x1bd7 P:0x9afc
+  <x0=a x1=b x2=c x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xaffa
+
+[g=2 cf=4] g0 = XNOR(x0, x1); g1 = BCAX(x2, x3, g0);
+  <x0=a x1=0 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x0af5
+  <x0=a x1=b x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x8787
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x1ee1 NP:0x1ee1 P:0x9699
+  <x0=a x1=b x2=c x3=a> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0xa9a9
+
+[g=2 cf=4] g0 = XOR(x2, x3); g1 = BCAX(x0, x1, g0);
+  <x0=a x1=b x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x03fc
+  <x0=a x1=b x2=1 x3=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x0af5
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x1ee1 NP:0x1ee1 P:0x2dd2
+  <x0=a x1=b x2=c x3=a> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x3ccc
+
+[g=2 cf=4] g0 = ANDN(x0, x1); g1 = MUX(x2, g0, x3);
+  <x0=a x1=b x2=c x3=c> [NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x0088
+  <x0=a x1=b x2=c x3=d> [NEON NEON_SHA3 SVE2] NPN:0x01ab NP:0x01ab P:0x0aca
+  <x0=a x1=b x2=c x3=b> [NEON NEON_SHA3 SVE2] NPN:0x03c3 NP:0x03c3 P:0x0af0
+  <x0=a x1=b x2=a x3=c> [NEON NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x0afa
+
+[g=2 cf=4] g0 = MUX(x0, x1, x2); g1 = ORN(g0, x3);
+  <x0=a x1=0 x2=b x3=c> [NEON NEON_SHA3] NPN:0x003f NP:0x03ff P:0x0aff
+  <x0=a x1=b x2=a x3=c> [NEON NEON_SHA3] NPN:0x003f NP:0x03ff P:0x88ff
+  <x0=a x1=b x2=c x3=d> [NEON NEON_SHA3] NPN:0x001b NP:0x1bff P:0xacff
+  <x0=a x1=1 x2=b x3=c> [NEON NEON_SHA3] NPN:0x0003 NP:0x3fff P:0xeeff
+
+[g=2 cf=4] g0 = XOR3(x0, x1, x2); g1 = ANDN(x3, g0);
+  <x0=a x1=b x2=c x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x0aa0
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x0069 NP:0x0069 P:0x2882
+  <x0=a x1=b x2=c x3=1> [NEON_SHA3 SVE2] NPN:0x3cc3 NP:0x3cc3 P:0x3cc3
+  <x0=a x1=0 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x8282
+
+[g=2 cf=4] g0 = MUX(x0, x1, x2); g1 = MUX(x3, g0, x2);
+  <x0=a x1=b x2=0 x3=c> [NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x8080
+  <x0=a x1=b x2=c x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+  <x0=a x1=b x2=c x3=d> [NEON NEON_SHA3 SVE2] NPN:0x01ef NP:0x01ef P:0xaccc
+  <x0=a x1=b x2=1 x3=c> [NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x3fff P:0xafff
+
+[g=2 cf=4] g0 = AND(x0, x1); g1 = BCAX(x2, g0, x3);
+  <x0=a x1=b x2=c x3=c> [NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x8080
+  <x0=a x1=b x2=1 x3=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x8787
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x07f8 NP:0x07f8 P:0x87f0
+  <x0=a x1=b x2=c x3=1> [NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0x88ff
+
+[g=2 cf=4] g0 = MUX(x2, x3, x4); g1 = MUX(x0, x1, g0);
+  <x0=a x1=b x2=c x3=0 x4=d> [NEON NEON_SHA3 SVE2] NPN:0x01ab NP:0x01ab P:0x88b8
+  <x0=a x1=b x2=b x3=c x4=d> [NEON NEON_SHA3 SVE2] NPN:0x03dd NP:0x03dd P:0xaad8
+  <x0=a x1=a x2=b x3=0 x4=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaee
+  <x0=a x1=b x2=c x3=1 x4=d> [NEON NEON_SHA3 SVE2] NPN:0x01ab NP:0x07f7 P:0xaafc
+
+[g=2 cf=4] g0 = ORN(x0, x1); g1 = MUX(x2, x3, g0);
+  <x0=a x1=b x2=a x3=c> [NEON NEON_SHA3] NPN:0x03cf NP:0x03cf P:0x88bb
+  <x0=a x1=b x2=c x3=d> [NEON NEON_SHA3] NPN:0x01ab NP:0x07f7 P:0xaacf
+  <x0=a x1=b x2=c x3=b> [NEON NEON_SHA3] NPN:0x03c3 NP:0x0ff3 P:0xaadd
+  <x0=a x1=b x2=c x3=c> [NEON NEON_SHA3] NPN:0x0003 NP:0x3fff P:0xeeff
+
+[g=2 cf=4] g0 = BCAX(x3, x1, x2); g1 = BCAX(g0, x0, x3);
+  <x0=0 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x3ccc
+  <x0=a x1=b x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x03c3 NP:0x03c3 P:0x9898
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x03de NP:0x03de P:0x9ab8
+  <x0=a x1=b x2=c x3=1> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xaffa
+
+[g=2 cf=4] g0 = MUX(x1, x3, x2); g1 = MUX(x3, g0, x0);
+  <x0=0 x1=a x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0xa8a8
+  <x0=a x1=a x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xeaea
+  <x0=a x1=b x2=c x3=d> [NEON NEON_SHA3 SVE2] NPN:0x01ab NP:0x07f7 P:0xeee2
+  <x0=1 x1=a x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x3fff P:0xeeff
+
+[g=2 cf=4] g0 = ORN(x0, x1); g1 = XOR3(x2, x3, g0);
+  <x0=a x1=b x2=c x3=0> [NEON_SHA3] NPN:0x03fc NP:0x03fc P:0x0af5
+  <x0=a x1=b x2=b x3=c> [NEON_SHA3] NPN:0x03fc NP:0x03fc P:0x8787
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3] NPN:0x1ee1 NP:0x1ee1 P:0x9699
+  <x0=a x1=b x2=c x3=a> [NEON_SHA3] NPN:0x03fc NP:0x03fc P:0xa9a9
+
+[g=2 cf=4] g0 = MUX(x0, x1, x2); g1 = ORN(x3, g0);
+  <x0=a x1=b x2=c x3=0> [NEON NEON_SHA3] NPN:0x03cf NP:0x03cf P:0x03cf
+  <x0=a x1=1 x2=b x3=c> [NEON NEON_SHA3] NPN:0x003f NP:0x03ff P:0xaaaf
+  <x0=a x1=b x2=c x3=d> [NEON NEON_SHA3] NPN:0x001b NP:0x1bff P:0xabef
+  <x0=a x1=0 x2=b x3=c> [NEON NEON_SHA3] NPN:0x0003 NP:0x3fff P:0xeeff
+
+[g=2 cf=4] g0 = MUX(x1, x0, x2); g1 = MUX(x3, x0, g0);
+  <x0=0 x1=a x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x000a
+  <x0=a x1=b x2=c x3=d> [NEON NEON_SHA3 SVE2] NPN:0x01ef NP:0x01ef P:0xaaac
+  <x0=a x1=b x2=c x3=a> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaee
+  <x0=1 x1=a x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x3fff P:0xfefe
+
+[g=2 cf=4] g0 = XOR3(x0, x1, x2); g1 = BCAX(x3, g0, x0);
+  <x0=a x1=0 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x0afa
+  <x0=0 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x8282
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x06f6 NP:0x06f6 P:0x99f0
+  <x0=1 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0x99ff
+
+[g=2 cf=4] g0 = BCAX(x1, x2, x3); g1 = BCAX(x3, g0, x0);
+  <x0=0 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x0088
+  <x0=a x1=b x2=c x3=a> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x01fe NP:0x01fe P:0x9aaa
+  <x0=1 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x0003 NP:0x3fff P:0xafff
+
+[g=2 cf=3] g0 = OR(x0, x1); g1 = XOR3(x2, x3, g0);
+  <x0=a x1=b x2=c x3=0> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x03fc
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x1ee1 NP:0x1ee1 P:0x9996
+  <x0=a x1=b x2=1 x3=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0xa9a9
+
+[g=2 cf=3] g0 = XOR(x2, x3); g1 = MUX(x0, x1, g0);
+  <x0=a x1=b x2=1 x3=c> [NEON NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x88bb
+  <x0=a x1=b x2=c x3=d> [NEON NEON_SHA3 SVE2] NPN:0x06f6 NP:0x06f6 P:0x8bb8
+  <x0=a x1=a x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xaffa
+
+[g=2 cf=3] g0 = MUX(x0, x1, x2); g1 = NOT(g0);
+  <x0=a x1=1 x2=b> [NEON NEON_SHA3 SVE2] NPN:0x000f NP:0x000f P:0x000f
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x03cf
+  <x0=a x1=b x2=a> [NEON NEON_SHA3 SVE2] NPN:0x000f NP:0x0fff P:0x0fff
+
+[g=2 cf=3] g0 = XOR3(x2, x3, x4); g1 = MUX(x0, g0, x1);
+  <x0=a x1=b x2=1 x3=c x4=0> [NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x0afa
+  <x0=a x1=b x2=c x3=d x4=0> [NEON_SHA3 SVE2] NPN:0x06f6 NP:0x06f6 P:0x2ee2
+  <x0=a x1=b x2=c x3=d x4=1> [NEON_SHA3 SVE2] NPN:0x06f6 NP:0x06f6 P:0x99f0
+
+[g=2 cf=3] g0 = XOR3(x2, x3, x4); g1 = XOR3(x0, x1, g0);
+  <x0=0 x1=a x2=1 x3=b x4=c> [NEON_SHA3 SVE2] NPN:0x3cc3 NP:0x3cc3 P:0x3cc3
+  <x0=a x1=b x2=0 x3=c x4=d> [NEON_SHA3 SVE2] NPN:0x6996 NP:0x6996 P:0x6996
+  <x0=a x1=b x2=c x3=d x4=1> [NEON_SHA3 SVE2] NPN:0x6996 NP:0x6996 P:0x9669
+
+[g=2 cf=3] g0 = XOR(x2, x3); g1 = BCAX(g0, x0, x1);
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x06f9 NP:0x06f9 P:0xa99a
+  <x0=a x1=b x2=c x3=1> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0xa9a9
+  <x0=a x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xaffa
+
+[g=2 cf=3] g0 = MUX(x0, x1, x2); g1 = ANDN(g0, x3);
+  <x0=a x1=0 x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x000a
+  <x0=a x1=b x2=c x3=d> [NEON NEON_SHA3 SVE2] NPN:0x001b NP:0x001b P:0x00ac
+  <x0=a x1=1 x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x00ee
+
+[g=2 cf=3] g0 = OR(x0, x1); g1 = XOR(x2, g0);
+  <x0=a x1=b x2=1> [x86 x86_BMI AVX512_PRED ARM NEON NEON_SHA3 SVE2] NPN:0x000f NP:0x000f P:0x000f
+  <x0=a x1=b x2=b> [x86] NPN:0x000f NP:0x000f P:0x00aa
+  <x0=a x1=b x2=c> [x86 x86_BMI AVX512_PRED ARM SVE_PRED NEON NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x03fc
+
+[g=2 cf=3] g0 = ANDN(x0, x1); g1 = XNOR(x2, g0);
+  <x0=a x1=b x2=b> [AVX512_PRED ARM NEON_SHA3 SVE2] NPN:0x000f NP:0x000f P:0x000f
+  <x0=a x1=b x2=c> [AVX512_PRED ARM NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x0af5
+  <x0=a x1=b x2=a> [AVX512_PRED ARM NEON_SHA3 SVE2] NPN:0x000f NP:0x0fff P:0x0fff
+
+[g=2 cf=3] g0 = NOT(x2); g1 = BCAX(x0, x1, g0);
+  <x0=a x1=b x2=b> [NEON_SHA3 SVE2] NPN:0x000f NP:0x000f P:0x000f
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x0af5
+  <x0=a x1=b x2=a> [NEON_SHA3 SVE2] NPN:0x000f NP:0x0fff P:0x0fff
+
+[g=2 cf=3] g0 = XNOR(x0, x1); g1 = BCAX(x2, g0, x3);
+  <x0=0 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x3ccc
+  <x0=a x1=b x2=c x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x8282
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x06f9 NP:0x06f9 P:0x96aa
+
+[g=2 cf=3] g0 = XOR3(x0, x1, x2); g1 = OR(x3, g0);
+  <x0=a x1=0 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xaffa
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x0069 NP:0x69ff P:0xebbe
+  <x0=1 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xebeb
+
+[g=2 cf=3] g0 = AND(x0, x1); g1 = XOR3(x2, x3, g0);
+  <x0=a x1=b x2=0 x3=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x3ccc
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x1ee1 NP:0x1ee1 P:0x8778
+  <x0=a x1=b x2=1 x3=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x8787
+
+[g=2 cf=3] g0 = MUX(x0, x1, x2); g1 = OR(x3, g0);
+  <x0=a x1=0 x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaee
+  <x0=a x1=b x2=c x3=d> [NEON NEON_SHA3 SVE2] NPN:0x001b NP:0x1bff P:0xeefa
+  <x0=a x1=1 x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x3fff P:0xfefe
+
+[g=2 cf=3] g0 = BCAX(x0, x2, x3); g1 = BCAX(x0, x1, g0);
+  <x0=a x1=b x2=c x3=0> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x0aa0
+  <x0=a x1=b x2=0 x3=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x3ccc
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x06f9 NP:0x06f9 P:0x96aa
+
+[g=2 cf=3] g0 = BCAX(x0, x2, x1); g1 = XOR3(x2, x3, g0);
+  <x0=a x1=b x2=c x3=0> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x03fc
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x1ee1 NP:0x1ee1 P:0x9996
+  <x0=a x1=b x2=c x3=1> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0xa9a9
+
+[g=2 cf=3] g0 = AND(x0, x1); g1 = XNOR(x2, g0);
+  <x0=a x1=b x2=0> [AVX512_PRED ARM NEON_SHA3 SVE2] NPN:0x000f NP:0x0fff P:0x0fff
+  <x0=a x1=b x2=c> [AVX512_PRED ARM NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x8787
+  <x0=a x1=b x2=b> [AVX512_PRED] NPN:0x000f NP:0x0fff P:0xaaff
+
+[g=2 cf=3] g0 = XOR3(x0, x1, x2); g1 = BCAX(x0, x3, g0);
+  <x0=a x1=b x2=0 x3=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x3ccc
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x1ee1 NP:0x1ee1 P:0x8778
+  <x0=a x1=b x2=1 x3=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x8787
+
+[g=2 cf=3] g0 = MUX(x3, x1, x2); g1 = BCAX(x3, x0, g0);
+  <x0=a x1=0 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x0afa
+  <x0=a x1=b x2=0 x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x8282
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x06f6 NP:0x06f6 P:0x99f0
+
+[g=2 cf=3] g0 = XOR3(x0, x1, x2); g1 = ANDN(g0, x3);
+  <x0=0 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x003c
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x0069 NP:0x0069 P:0x0096
+  <x0=1 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x0099
+
+[g=2 cf=3] g0 = BCAX(x1, x2, x3); g1 = MUX(x0, x1, g0);
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x03de NP:0x03de P:0xaac6
+  <x0=a x1=b x2=c x3=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaee
+  <x0=a x1=1 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xebeb
+
+[g=2 cf=3] g0 = OR(x1, x2); g1 = XNOR(x0, g0);
+  <x0=0 x1=a x2=b> [AVX512_PRED ARM NEON_SHA3 SVE2] NPN:0x000f NP:0x000f P:0x000f
+  <x0=a x1=b x2=c> [AVX512_PRED ARM NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0xa9a9
+  <x0=a x1=b x2=a> [AVX512_PRED] NPN:0x000f NP:0x0fff P:0xaaff
+
+[g=2 cf=3] g0 = AND(x0, x1); g1 = XOR(x2, g0);
+  <x0=a x1=b x2=a> [x86] NPN:0x000f NP:0x000f P:0x00aa
+  <x0=a x1=b x2=1> [x86 x86_BMI AVX512_PRED ARM NEON NEON_SHA3 SVE2] NPN:0x000f NP:0x0fff P:0x0fff
+  <x0=a x1=b x2=c> [x86 x86_BMI AVX512_PRED ARM SVE_PRED NEON NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x3ccc
+
+[g=2 cf=3] g0 = BCAX(x2, x0, x3); g1 = MUX(x1, g0, x0);
+  <x0=0 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x0aa0
+  <x0=a x1=b x2=c x3=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x03de NP:0x06f3 P:0x9aca
+
+[g=2 cf=3] g0 = XOR3(x1, x2, x3); g1 = BCAX(x0, x1, g0);
+  <x0=a x1=b x2=c x3=0> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x03fc
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x1ee1 NP:0x1ee1 P:0x9996
+  <x0=a x1=b x2=c x3=1> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0xa9a9
+
+[g=2 cf=3] g0 = ORN(x0, x1); g1 = XOR(x2, g0);
+  <x0=a x1=b x2=a> [ARM NEON NEON_SHA3] NPN:0x000f NP:0x000f P:0x000f
+  <x0=a x1=b x2=c> [ARM SVE_PRED NEON NEON_SHA3] NPN:0x03fc NP:0x03fc P:0x0af5
+  <x0=a x1=b x2=b> [ARM NEON NEON_SHA3] NPN:0x000f NP:0x0fff P:0x0fff
+
+[g=2 cf=3] g0 = XOR3(x0, x1, x2); g1 = AND(x3, g0);
+  <x0=a x1=b x2=0 x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x0aa0
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x0069 NP:0x0069 P:0x8228
+  <x0=1 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x8282
+
+[g=2 cf=3] g0 = ORN(x2, x3); g1 = BCAX(x0, x1, g0);
+  <x0=a x1=b x2=a x3=c> [NEON_SHA3] NPN:0x03cf NP:0x03cf P:0x88bb
+  <x0=a x1=b x2=c x3=a> [NEON_SHA3] NPN:0x003c NP:0x3cff P:0x99ff
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3] NPN:0x0356 NP:0x1eee P:0x9acf
+
+[g=2 cf=3] g0 = BCAX(x0, x2, x3); g1 = XOR3(x0, x1, g0);
+  <x0=a x1=0 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x3ccc
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x1ee1 NP:0x1ee1 P:0x8778
+  <x0=a x1=1 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x8787
+
+[g=2 cf=3] g0 = XOR3(x0, x1, x2); g1 = ORN(g0, x3);
+  <x0=a x1=b x2=0 x3=c> [NEON_SHA3] NPN:0x003c NP:0x3cff P:0x3cff
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3] NPN:0x0069 NP:0x69ff P:0x96ff
+  <x0=a x1=1 x2=b x3=c> [NEON_SHA3] NPN:0x003c NP:0x3cff P:0x99ff
+
+[g=2 cf=2] g0 = ANDN(x0, x1); g1 = MUX(x2, g0, x0);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x0aaa
+  <x0=1 x1=a x2=b> [NEON NEON_SHA3 SVE2] NPN:0x000f NP:0x0fff P:0x0fff
+
+[g=2 cf=2] g0 = XOR(x1, x2); g1 = ORN(x0, g0);
+  <x0=0 x1=a x2=b> [SVE_PRED NEON] NPN:0x0ff0 NP:0x0ff0 P:0x9999
+  <x0=a x1=b x2=c> [ARM SVE_PRED NEON NEON_SHA3] NPN:0x003c NP:0x3cff P:0xebeb
+
+[g=2 cf=2] g0 = OR(x2, x3); g1 = MUX(x0, x1, g0);
+  <x0=a x1=b x2=c x3=d> [NEON NEON_SHA3 SVE2] NPN:0x01ab NP:0x07f7 P:0xaafc
+  <x0=a x1=a x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x3fff P:0xfefe
+
+[g=2 cf=2] g0 = ORN(x0, x2); g1 = BCAX(g0, x0, x1);
+  <x0=a x1=0 x2=b> [NEON_SHA3] NPN:0x000f NP:0x000f P:0x000f
+  <x0=a x1=b x2=c> [NEON_SHA3] NPN:0x03fc NP:0x03fc P:0xa9a9
+
+[g=2 cf=2] g0 = XNOR(x1, x2); g1 = ANDN(g0, x0);
+  <x0=a x1=b x2=a> [AVX512_PRED ARM NEON_SHA3 SVE2] NPN:0x000f NP:0x000f P:0x000f
+  <x0=a x1=b x2=c> [AVX512_PRED ARM NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x0099
+
+[g=2 cf=2] g0 = OR(x2, x3); g1 = MUX(x0, g0, x1);
+  <x0=a x1=a x2=b x3=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0xa8a8
+  <x0=a x1=b x2=c x3=d> [NEON NEON_SHA3 SVE2] NPN:0x01ab NP:0x07f7 P:0xeee2
+
+[g=2 cf=2] g0 = XOR(x2, x3); g1 = XOR3(x0, x1, g0);
+  <x0=a x1=1 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x3cc3 NP:0x3cc3 P:0x3cc3
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x6996 NP:0x6996 P:0x6996
+
+[g=2 cf=2] g0 = MUX(x1, x2, x0); g1 = MUX(x2, x1, g0);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x03c3 NP:0x03c3 P:0x9898
+  <x0=1 x1=a x2=b> [NEON] NPN:0x0ff0 NP:0x0ff0 P:0x9999
+
+[g=2 cf=2] g0 = XOR(x0, x2); g1 = MUX(x0, g0, x1);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x0afa
+  <x0=a x1=1 x2=b> [NEON NEON_SHA3 SVE2] NPN:0x000f NP:0x0fff P:0x0fff
+
+[g=2 cf=2] g0 = ANDN(x2, x0); g1 = BCAX(x0, x1, g0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x0afa
+  <x0=a x1=b x2=1> [NEON_SHA3 SVE2] NPN:0x000f NP:0x0fff P:0x0fff
+
+[g=2 cf=2] g0 = XNOR(x0, x1); g1 = XOR3(x2, x3, g0);
+  <x0=0 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x3cc3 NP:0x3cc3 P:0x3cc3
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x6996 NP:0x6996 P:0x9669
+
+[g=2 cf=2] g0 = XOR(x1, x2); g1 = ORN(g0, x0);
+  <x0=a x1=b x2=1> [ARM NEON NEON_SHA3] NPN:0x000f NP:0x0fff P:0x0fff
+  <x0=a x1=b x2=c> [ARM SVE_PRED NEON NEON_SHA3] NPN:0x003c NP:0x3cff P:0x3cff
+
+[g=2 cf=2] g0 = NOR(x1, x2); g1 = XOR(x0, g0);
+  <x0=a x1=b x2=b> [SVE_PRED] NPN:0x0ff0 NP:0x0ff0 P:0x9999
+  <x0=a x1=b x2=c> [SVE_PRED] NPN:0x03fc NP:0x03fc P:0xa9a9
+
+[g=2 cf=2] g0 = MUX(x1, x0, x2); g1 = ANDN(x0, g0);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x000a
+  <x0=1 x1=a x2=b> [NEON NEON_SHA3 SVE2] NPN:0x000f NP:0x000f P:0x000f
+
+[g=2 cf=2] g0 = XOR(x2, x3); g1 = MUX(x0, g0, x1);
+  <x0=a x1=b x2=1 x3=c> [NEON NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x0afa
+  <x0=a x1=b x2=c x3=d> [NEON NEON_SHA3 SVE2] NPN:0x06f6 NP:0x06f6 P:0x2ee2
+
+[g=2 cf=2] g0 = XNOR(x1, x2); g1 = MUX(x0, x1, g0);
+  <x0=a x1=0 x2=b> [NEON_SHA3 SVE2] NPN:0x000f NP:0x000f P:0x000f
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0xa9a9
+
+[g=2 cf=2] g0 = XNOR(x0, x2); g1 = BCAX(g0, x0, x1);
+  <x0=a x1=0 x2=b> [NEON_SHA3 SVE2] NPN:0x000f NP:0x000f P:0x000f
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0xa9a9
+
+[g=2 cf=2] g0 = BCAX(x0, x1, x2); g1 = NOT(g0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x0af5
+  <x0=a x1=b x2=a> [NEON_SHA3 SVE2] NPN:0x000f NP:0x0fff P:0x0fff
+
+[g=2 cf=2] g0 = XNOR(x1, x2); g1 = BCAX(g0, x0, x1);
+  <x0=a x1=0 x2=b> [NEON_SHA3 SVE2] NPN:0x000f NP:0x000f P:0x000f
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x88bb
+
+[g=2 cf=2] g0 = ANDN(x0, x1); g1 = ANDN(x2, g0);
+  <x0=a x1=b x2=c> [x86_BMI AVX512_PRED ARM SVE_PRED NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+  <x0=a x1=b x2=1> [x86_BMI AVX512_PRED] NPN:0x000f NP:0x0fff P:0xaaff
+
+[g=2 cf=2] g0 = XNOR(x0, x1); g1 = MUX(x0, x2, g0);
+  <x0=a x1=b x2=0> [NEON_SHA3 SVE2] NPN:0x000f NP:0x000f P:0x000f
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x88bb
+
+[g=2 cf=2] g0 = ORN(x2, x1); g1 = XOR3(x0, x2, g0);
+  <x0=0 x1=a x2=b> [NEON_SHA3] NPN:0x000f NP:0x000f P:0x000f
+  <x0=a x1=b x2=c> [NEON_SHA3] NPN:0x03fc NP:0x03fc P:0xa9a9
+
+[g=2 cf=2] g0 = XOR3(x0, x1, x2); g1 = ORN(g0, x0);
+  <x0=a x1=b x2=0> [NEON_SHA3] NPN:0x000f NP:0x0fff P:0x0fff
+  <x0=a x1=b x2=c> [NEON_SHA3] NPN:0x003c NP:0x3cff P:0x99ff
+
+[g=2 cf=2] g0 = MUX(x1, x2, x0); g1 = ORN(x0, g0);
+  <x0=0 x1=a x2=b> [NEON NEON_SHA3] NPN:0x000f NP:0x0fff P:0x0fff
+  <x0=a x1=b x2=c> [NEON NEON_SHA3] NPN:0x0003 NP:0x3fff P:0xafff
+
+[g=2 cf=2] g0 = XOR3(x1, x2, x3); g1 = XOR(x0, g0);
+  <x0=a x1=1 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x3cc3 NP:0x3cc3 P:0x3cc3
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x6996 NP:0x6996 P:0x6996
+
+[g=2 cf=2] g0 = BCAX(x0, x2, x1); g1 = ANDN(g0, x2);
+  <x0=a x1=1 x2=b> [NEON_SHA3 SVE2] NPN:0x000f NP:0x000f P:0x000f
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x003c
+
+[g=2 cf=2] g0 = XOR(x0, x2); g1 = BCAX(x1, x2, g0);
+  <x0=1 x1=a x2=b> [NEON_SHA3 SVE2] NPN:0x000f NP:0x000f P:0x000f
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x03fc
+
+[g=2 cf=2] g0 = ORN(x0, x2); g1 = XOR3(x1, x2, g0);
+  <x0=a x1=0 x2=b> [NEON_SHA3] NPN:0x000f NP:0x0fff P:0x0fff
+  <x0=a x1=b x2=c> [NEON_SHA3] NPN:0x03fc NP:0x03fc P:0x8787
+
+[g=2 cf=2] g0 = XOR(x0, x2); g1 = BCAX(x1, g0, x0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x0afa
+  <x0=1 x1=a x2=b> [NEON_SHA3 SVE2] NPN:0x000f NP:0x0fff P:0x0fff
+
+[g=2 cf=2] g0 = OR(x1, x2); g1 = ANDN(x0, g0);
+  <x0=a x1=b x2=c> [x86_BMI AVX512_PRED ARM SVE_PRED NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x000a
+  <x0=1 x1=a x2=b> [x86_BMI AVX512_PRED ARM NEON NEON_SHA3 SVE2] NPN:0x000f NP:0x000f P:0x000f
+
+[g=2 cf=2] g0 = MUX(x0, x1, x2); g1 = XNOR(x2, g0);
+  <x0=a x1=b x2=0> [NEON_SHA3 SVE2] NPN:0x000f NP:0x0fff P:0x0fff
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0x99ff
+
+[g=2 cf=2] g0 = XNOR(x0, x1); g1 = OR(x2, g0);
+  <x0=a x1=b x2=a> [AVX512_PRED] NPN:0x000f NP:0x0fff P:0xaaff
+  <x0=a x1=b x2=c> [AVX512_PRED ARM NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xebeb
+
+[g=2 cf=2] g0 = XOR3(x0, x1, x2); g1 = ANDN(g0, x0);
+  <x0=a x1=b x2=1> [NEON_SHA3 SVE2] NPN:0x000f NP:0x000f P:0x000f
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x003c
+
+[g=2 cf=2] g0 = ORN(x2, x0); g1 = MUX(x2, x1, g0);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3] NPN:0x03cf NP:0x03cf P:0x88bb
+  <x0=a x1=a x2=b> [NEON] NPN:0x0ff0 NP:0x0ff0 P:0x9999
+
+[g=2 cf=2] g0 = XOR(x0, x1); g1 = AND(x2, g0);
+  <x0=1 x1=a x2=b> [x86] NPN:0x000f NP:0x000f P:0x00aa
+  <x0=a x1=b x2=c> [x86 x86_BMI AVX512_PRED ARM SVE_PRED NEON NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x0aa0
+
+[g=2 cf=2] g0 = XOR(x1, x2); g1 = NOR(x0, g0);
+  <x0=a x1=b x2=c> [SVE_PRED] NPN:0x003c NP:0x003c P:0x0099
+  <x0=0 x1=a x2=b> [SVE_PRED] NPN:0x0ff0 NP:0x0ff0 P:0x9999
+
+[g=2 cf=2] g0 = XNOR(x0, x1); g1 = MUX(x2, x3, g0);
+  <x0=0 x1=a x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x88bb
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x06f6 NP:0x06f6 P:0xaac3
+
+[g=2 cf=2] g0 = XNOR(x1, x2); g1 = ORN(g0, x0);
+  <x0=a x1=b x2=0> [ARM NEON_SHA3] NPN:0x000f NP:0x0fff P:0x0fff
+  <x0=a x1=b x2=c> [ARM NEON_SHA3] NPN:0x003c NP:0x3cff P:0x99ff
+
+[g=2 cf=2] g0 = ORN(x0, x1); g1 = MUX(x2, g0, x3);
+  <x0=a x1=b x2=c x3=c> [NEON NEON_SHA3] NPN:0x003f NP:0x003f P:0x88aa
+  <x0=a x1=b x2=c x3=d> [NEON NEON_SHA3] NPN:0x01ab NP:0x07f7 P:0xacfc
+
+[g=2 cf=2] g0 = ANDN(x1, x2); g1 = XOR3(x0, x1, g0);
+  <x0=1 x1=a x2=b> [NEON_SHA3 SVE2] NPN:0x000f NP:0x0fff P:0x0fff
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x3ccc
+
+[g=2 cf=2] g0 = ANDN(x0, x2); g1 = XOR3(x1, x2, g0);
+  <x0=a x1=1 x2=b> [NEON_SHA3 SVE2] NPN:0x000f NP:0x000f P:0x000f
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x03fc
+
+[g=2 cf=2] g0 = ORN(x0, x1); g1 = MUX(x2, x0, g0);
+  <x0=0 x1=a x2=b> [NEON NEON_SHA3] NPN:0x000f NP:0x000f P:0x000f
+  <x0=a x1=b x2=c> [NEON NEON_SHA3] NPN:0x003f NP:0x03ff P:0xaaaf
+
+[g=2 cf=2] g0 = ORN(x0, x1); g1 = MUX(x2, x1, g0);
+  <x0=a x1=b x2=a> [NEON] NPN:0x0ff0 NP:0x0ff0 P:0x9999
+  <x0=a x1=b x2=c> [NEON NEON_SHA3] NPN:0x03c3 NP:0x0ff3 P:0xaadd
+
+[g=2 cf=2] g0 = ORN(x2, x3); g1 = BCAX(x0, g0, x1);
+  <x0=a x1=a x2=b x3=c> [NEON_SHA3] NPN:0x003f NP:0x003f P:0x88aa
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3] NPN:0x01fe NP:0x01fe P:0x9aaa
+
+[g=2 cf=2] g0 = XOR(x1, x2); g1 = ANDN(g0, x0);
+  <x0=a x1=b x2=1> [x86_BMI AVX512_PRED ARM NEON NEON_SHA3 SVE2] NPN:0x000f NP:0x000f P:0x000f
+  <x0=a x1=b x2=c> [x86_BMI AVX512_PRED ARM SVE_PRED NEON NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x003c
+
+[g=2 cf=2] g0 = XOR(x1, x2); g1 = OR(x0, g0);
+  <x0=a x1=b x2=1> [x86 x86_BMI AVX512_PRED] NPN:0x000f NP:0x0fff P:0xaaff
+  <x0=a x1=b x2=c> [x86 x86_BMI AVX512_PRED ARM SVE_PRED NEON NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xaffa
+
+[g=2 cf=2] g0 = ORN(x0, x2); g1 = BCAX(x2, x1, g0);
+  <x0=a x1=0 x2=b> [NEON_SHA3] NPN:0x000f NP:0x0fff P:0x0fff
+  <x0=a x1=b x2=c> [NEON_SHA3] NPN:0x003c NP:0x3cff P:0x99ff
+
+[g=2 cf=2] g0 = AND(x0, x1); g1 = MUX(x2, g0, x3);
+  <x0=a x1=b x2=c x3=c> [NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x8080
+  <x0=a x1=b x2=c x3=d> [NEON NEON_SHA3 SVE2] NPN:0x01ab NP:0x01ab P:0x88f0
+
+[g=2 cf=2] g0 = XOR(x0, x1); g1 = MUX(x2, x1, g0);
+  <x0=1 x1=a x2=b> [NEON] NPN:0x0ff0 NP:0x0ff0 P:0x9999
+  <x0=a x1=b x2=c> [NEON] NPN:0x03fc NP:0x03fc P:0x99aa
+
+[g=2 cf=2] g0 = XOR(x0, x1); g1 = MUX(x2, g0, x1);
+  <x0=a x1=1 x2=b> [NEON NEON_SHA3 SVE2] NPN:0x000f NP:0x0fff P:0x0fff
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x3ccc
+
+[g=2 cf=2] g0 = OR(x1, x2); g1 = ORN(x0, g0);
+  <x0=0 x1=a x2=b> [ARM NEON NEON_SHA3] NPN:0x000f NP:0x000f P:0x000f
+  <x0=a x1=b x2=c> [ARM SVE_PRED NEON NEON_SHA3] NPN:0x003f NP:0x03ff P:0xaaaf
+
+[g=2 cf=2] g0 = XOR(x1, x2); g1 = XOR(x0, g0);
+  <x0=a x1=b x2=c> [x86 x86_BMI AVX512_PRED ARM SVE_PRED NEON] NPN:0x3cc3 NP:0x3cc3 P:0x9696
+  <x0=a x1=1 x2=b> [x86 x86_BMI SVE_PRED NEON] NPN:0x0ff0 NP:0x0ff0 P:0x9999
+
+[g=2 cf=2] g0 = XNOR(x2, x3); g1 = MUX(x0, g0, x1);
+  <x0=a x1=b x2=0 x3=c> [NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x0afa
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x06f6 NP:0x06f6 P:0x99f0
+
+[g=2 cf=2] g0 = ORN(x1, x0); g1 = BCAX(g0, x2, x0);
+  <x0=a x1=b x2=0> [NEON_SHA3] NPN:0x000f NP:0x0fff P:0x0fff
+  <x0=a x1=b x2=c> [NEON_SHA3] NPN:0x03c3 NP:0x0ff3 P:0x99bb
+
+[g=2 cf=2] g0 = XOR(x0, x1); g1 = BCAX(x0, x2, g0);
+  <x0=a x1=1 x2=b> [NEON_SHA3 SVE2] NPN:0x000f NP:0x0fff P:0x0fff
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x3ccc
+
+[g=2 cf=2] g0 = AND(x0, x1); g1 = ANDN(x2, g0);
+  <x0=a x1=b x2=c> [x86_BMI AVX512_PRED ARM SVE_PRED NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x0aaa
+  <x0=a x1=b x2=1> [x86_BMI AVX512_PRED ARM NEON NEON_SHA3 SVE2] NPN:0x000f NP:0x0fff P:0x0fff
+
+[g=2 cf=2] g0 = XOR3(x0, x1, x2); g1 = XNOR(x3, g0);
+  <x0=a x1=b x2=c x3=0> [NEON_SHA3 SVE2] NPN:0x3cc3 NP:0x3cc3 P:0x3cc3
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x6996 NP:0x6996 P:0x9669
+
+[g=2 cf=2] g0 = BCAX(x2, x0, x1); g1 = ORN(g0, x2);
+  <x0=a x1=0 x2=b> [NEON_SHA3] NPN:0x000f NP:0x0fff P:0x0fff
+  <x0=a x1=b x2=c> [NEON_SHA3] NPN:0x003c NP:0x3cff P:0x99ff
+
+[g=2 cf=2] g0 = MUX(x0, x2, x1); g1 = XOR(x2, g0);
+  <x0=a x1=b x2=1> [NEON NEON_SHA3 SVE2] NPN:0x000f NP:0x000f P:0x000f
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x003c
+
+[g=2 cf=2] g0 = ANDN(x2, x1); g1 = MUX(x2, g0, x0);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x0afa
+  <x0=1 x1=a x2=b> [NEON NEON_SHA3 SVE2] NPN:0x000f NP:0x0fff P:0x0fff
+
+[g=2 cf=2] g0 = MUX(x0, x1, x3); g1 = BCAX(x3, x2, g0);
+  <x0=a x1=b x2=0 x3=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x0aa0
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x0359 NP:0x0359 P:0x9ac0
+
+[g=2 cf=2] g0 = ANDN(x2, x1); g1 = BCAX(x0, x1, g0);
+  <x0=a x1=b x2=1> [NEON_SHA3 SVE2] NPN:0x000f NP:0x000f P:0x000f
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x003c
+
+[g=2 cf=2] g0 = MUX(x0, x2, x3); g1 = BCAX(x1, x0, g0);
+  <x0=a x1=1 x2=b x3=c> [NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x88bb
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x06f6 NP:0x06f6 P:0x8bb8
+
+[g=2 cf=2] g0 = ANDN(x0, x1); g1 = XOR(x2, g0);
+  <x0=a x1=b x2=c> [x86_BMI AVX512_PRED ARM SVE_PRED NEON] NPN:0x03fc NP:0x03fc P:0x99aa
+  <x0=a x1=b x2=1> [x86_BMI AVX512_PRED] NPN:0x000f NP:0x0fff P:0xaaff
+
+[g=2 cf=2] g0 = XOR(x0, x1); g1 = NAND(x2, g0);
+  <x0=a x1=b x2=1> [SVE_PRED] NPN:0x0ff0 NP:0x0ff0 P:0x9999
+  <x0=a x1=b x2=c> [SVE_PRED] NPN:0x003c NP:0x3cff P:0x99ff
+
+[g=2 cf=2] g0 = ORN(x2, x0); g1 = BCAX(g0, x1, x2);
+  <x0=a x1=0 x2=b> [NEON_SHA3] NPN:0x000f NP:0x000f P:0x000f
+  <x0=a x1=b x2=c> [NEON_SHA3] NPN:0x03c3 NP:0x03c3 P:0x8899
+
+[g=2 cf=2] g0 = ANDN(x2, x1); g1 = BCAX(x2, g0, x0);
+  <x0=1 x1=a x2=b> [NEON_SHA3 SVE2] NPN:0x000f NP:0x0fff P:0x0fff
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x3ccc
+
+[g=2 cf=2] g0 = ORN(x1, x2); g1 = BCAX(x1, x0, g0);
+  <x0=0 x1=a x2=b> [NEON_SHA3] NPN:0x000f NP:0x000f P:0x000f
+  <x0=a x1=b x2=c> [NEON_SHA3] NPN:0x03cf NP:0x03cf P:0x88bb
+
+[g=2 cf=2] g0 = ANDN(x0, x2); g1 = BCAX(x1, g0, x2);
+  <x0=a x1=1 x2=b> [NEON_SHA3 SVE2] NPN:0x000f NP:0x000f P:0x000f
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x03c3 NP:0x03c3 P:0x03cc
+
+[g=2 cf=2] g0 = BCAX(x1, x0, x2); g1 = BCAX(x3, x0, g0);
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x06f9 NP:0x06f9 P:0xa99a
+  <x0=a x1=b x2=c x3=1> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0xa9a9
+
+[g=2 cf=2] g0 = NAND(x1, x2); g1 = XOR(x0, g0);
+  <x0=a x1=b x2=c> [SVE_PRED] NPN:0x03fc NP:0x03fc P:0x8787
+  <x0=a x1=b x2=b> [SVE_PRED] NPN:0x0ff0 NP:0x0ff0 P:0x9999
+
+[g=2 cf=2] g0 = AND(x1, x2); g1 = ORN(x0, g0);
+  <x0=0 x1=a x2=b> [ARM NEON NEON_SHA3] NPN:0x000f NP:0x0fff P:0x0fff
+  <x0=a x1=b x2=c> [ARM SVE_PRED NEON NEON_SHA3] NPN:0x0003 NP:0x3fff P:0xafff
+
+[g=2 cf=2] g0 = XOR(x1, x2); g1 = ANDN(x0, g0);
+  <x0=a x1=b x2=c> [x86_BMI AVX512_PRED ARM SVE_PRED NEON NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x8282
+  <x0=1 x1=a x2=b> [x86_BMI SVE_PRED NEON] NPN:0x0ff0 NP:0x0ff0 P:0x9999
+
+[g=2 cf=2] g0 = ORN(x1, x2); g1 = BCAX(x0, x2, g0);
+  <x0=a x1=0 x2=b> [NEON_SHA3] NPN:0x000f NP:0x000f P:0x000f
+  <x0=a x1=b x2=c> [NEON_SHA3] NPN:0x03cf NP:0x03cf P:0x88bb
+
+[g=2 cf=2] g0 = XNOR(x1, x2); g1 = BCAX(x0, x1, g0);
+  <x0=a x1=b x2=0> [NEON_SHA3 SVE2] NPN:0x000f NP:0x000f P:0x000f
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0xa9a9
+
+[g=2 cf=2] g0 = ANDN(x0, x2); g1 = BCAX(x1, x0, g0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x0afa
+  <x0=a x1=1 x2=b> [NEON_SHA3 SVE2] NPN:0x000f NP:0x0fff P:0x0fff
+
+[g=2 cf=2] g0 = XNOR(x0, x2); g1 = BCAX(x0, x1, g0);
+  <x0=a x1=b x2=0> [NEON_SHA3 SVE2] NPN:0x000f NP:0x0fff P:0x0fff
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x8787
+
+[g=2 cf=2] g0 = ANDN(x0, x2); g1 = MUX(x1, x2, g0);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x03c3 NP:0x03c3 P:0x9898
+  <x0=1 x1=a x2=b> [NEON] NPN:0x0ff0 NP:0x0ff0 P:0x9999
+
+[g=2 cf=1] g0 = XOR(x1, x2); g1 = MUX(g0, x0, x2);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x033f NP:0x033f P:0xe8e8
+
+[g=2 cf=1] g0 = MUX(x1, x0, x2); g1 = MUX(x2, g0, x1);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x03c3 NP:0x0ff3 P:0xaff0
+
+[g=2 cf=1] g0 = NOT(x0); g1 = XOR3(x1, x2, g0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x3cc3 NP:0x3cc3 P:0x3cc3
+
+[g=2 cf=1] g0 = MUX(x0, x2, x1); g1 = BCAX(x1, g0, x0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+
+[g=2 cf=1] g0 = XNOR(x1, x2); g1 = MUX(g0, x2, x0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x033f NP:0x033f P:0xe8e8
+
+[g=2 cf=1] g0 = AND(x0, x1); g1 = XOR(x1, g0);
+  <x0=a x1=b> [x86] NPN:0x000f NP:0x000f P:0x00aa
+
+[g=2 cf=1] g0 = OR(x0, x1); g1 = NOT(g0);
+  <x0=a x1=b> [x86 x86_BMI AVX512_PRED ARM NEON NEON_SHA3 SVE2] NPN:0x000f NP:0x000f P:0x000f
+
+[g=2 cf=1] g0 = ANDN(x0, x1); g1 = MUX(g0, x0, x2);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaee
+
+[g=2 cf=1] g0 = AND(x1, x2); g1 = OR(x0, g0);
+  <x0=a x1=b x2=c> [x86 x86_BMI AVX512_PRED ARM SVE_PRED NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xeaea
+
+[g=2 cf=1] g0 = MUX(x0, x2, x1); g1 = ORN(g0, x2);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3] NPN:0x0003 NP:0x3fff P:0xeeff
+
+[g=2 cf=1] g0 = OR(x0, x2); g1 = BCAX(x1, x0, g0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xaffa
+
+[g=2 cf=1] g0 = NAND(x1, x2); g1 = ANDN(g0, x0);
+  <x0=a x1=b x2=c> [SVE_PRED] NPN:0x003f NP:0x003f P:0x003f
+
+[g=2 cf=1] g0 = NOT(x1); g1 = ANDN(g0, x0);
+  <x0=a x1=b> [x86_BMI AVX512_PRED ARM NEON NEON_SHA3 SVE2] NPN:0x000f NP:0x000f P:0x000f
+
+[g=2 cf=1] g0 = MUX(x1, x2, x0); g1 = AND(x0, g0);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+
+[g=2 cf=1] g0 = OR(x0, x2); g1 = BCAX(g0, x1, x0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x03c3 NP:0x03c3 P:0x9898
+
+[g=2 cf=1] g0 = BCAX(x0, x2, x1); g1 = BCAX(x1, g0, x0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+
+[g=2 cf=1] g0 = BCAX(x1, x2, x0); g1 = AND(x0, g0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+
+[g=2 cf=1] g0 = ANDN(x0, x1); g1 = XNOR(x1, g0);
+  <x0=a x1=b> [AVX512_PRED ARM NEON_SHA3 SVE2] NPN:0x000f NP:0x000f P:0x000f
+
+[g=2 cf=1] g0 = AND(x0, x1); g1 = BCAX(x2, x3, g0);
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x0356 NP:0x0356 P:0x8788
+
+[g=2 cf=1] g0 = ANDN(x2, x0); g1 = MUX(g0, x0, x1);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+
+[g=2 cf=1] g0 = ORN(x0, x1); g1 = XNOR(x2, g0);
+  <x0=a x1=b x2=c> [ARM] NPN:0x03fc NP:0x03fc P:0x99aa
+
+[g=2 cf=1] g0 = ANDN(x0, x2); g1 = BCAX(x0, x1, g0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x0aa0
+
+[g=2 cf=1] g0 = ANDN(x0, x2); g1 = BCAX(x1, g0, x0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x03c3 NP:0x0ff3 P:0x3cfc
+
+[g=2 cf=1] g0 = MUX(x0, x2, x1); g1 = ORN(x2, g0);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3] NPN:0x0003 NP:0x3fff P:0xeeff
+
+[g=2 cf=1] g0 = XNOR(x0, x1); g1 = XNOR(x2, g0);
+  <x0=a x1=b x2=c> [AVX512_PRED ARM] NPN:0x3cc3 NP:0x3cc3 P:0x9696
+
+[g=2 cf=1] g0 = OR(x0, x2); g1 = MUX(g0, x2, x1);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaee
+
+[g=2 cf=1] g0 = BCAX(x1, x2, x0); g1 = MUX(g0, x2, x1);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x033f NP:0x033f P:0xe8e8
+
+[g=2 cf=1] g0 = BCAX(x1, x0, x2); g1 = BCAX(x2, x1, g0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x8282
+
+[g=2 cf=1] g0 = XNOR(x0, x1); g1 = MUX(g0, x2, x1);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x033f NP:0x033f P:0x88ee
+
+[g=2 cf=1] g0 = BCAX(x0, x2, x1); g1 = MUX(x1, x0, g0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+
+[g=2 cf=1] g0 = ORN(x1, x2); g1 = MUX(g0, x0, x1);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3] NPN:0x003f NP:0x003f P:0x88aa
+
+[g=2 cf=1] g0 = ORN(x1, x2); g1 = MUX(g0, x0, x2);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3] NPN:0x003f NP:0x03ff P:0xaaee
+
+[g=2 cf=1] g0 = ANDN(x1, x2); g1 = ANDN(g0, x0);
+  <x0=a x1=b x2=c> [x86_BMI AVX512_PRED ARM SVE_PRED NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x000a
+
+[g=2 cf=1] g0 = BCAX(x1, x2, x0); g1 = MUX(g0, x1, x2);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x033f NP:0x033f P:0x88ee
+
+[g=2 cf=1] g0 = BCAX(x0, x2, x1); g1 = ORN(x2, g0);
+  <x0=a x1=b x2=c> [NEON_SHA3] NPN:0x003c NP:0x3cff P:0xebeb
+
+[g=2 cf=1] g0 = BCAX(x0, x2, x1); g1 = BCAX(g0, x1, x0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0xa8a8
+
+[g=2 cf=1] g0 = ORN(x1, x0); g1 = MUX(g0, x0, x2);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3] NPN:0x003f NP:0x003f P:0xa8a8
+
+[g=2 cf=1] g0 = BCAX(x0, x2, x1); g1 = MUX(x1, g0, x0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x03c3 NP:0x0ff3 P:0xaff0
+
+[g=2 cf=1] g0 = NOT(x0); g1 = ORN(g0, x1);
+  <x0=a x1=b> [ARM NEON NEON_SHA3] NPN:0x000f NP:0x0fff P:0x0fff
+
+[g=2 cf=1] g0 = NOT(x0); g1 = AND(x1, g0);
+  <x0=a x1=b> [x86] NPN:0x000f NP:0x000f P:0x00aa
+
+[g=2 cf=1] g0 = NOT(x0); g1 = MUX(x1, x2, g0);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x88bb
+
+[g=2 cf=1] g0 = BCAX(x1, x2, x0); g1 = ORN(g0, x0);
+  <x0=a x1=b x2=c> [NEON_SHA3] NPN:0x0003 NP:0x3fff P:0xafff
+
+[g=2 cf=1] g0 = MUX(x1, x0, x2); g1 = ANDN(g0, x0);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x000a
+
+[g=2 cf=1] g0 = NOR(x1, x2); g1 = ANDN(x0, g0);
+  <x0=a x1=b x2=c> [SVE_PRED] NPN:0x003f NP:0x003f P:0xa8a8
+
+[g=2 cf=1] g0 = NOT(x0); g1 = BCAX(x1, g0, x2);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x3ccc
+
+[g=2 cf=1] g0 = ORN(x2, x1); g1 = BCAX(x0, g0, x2);
+  <x0=a x1=b x2=c> [NEON_SHA3] NPN:0x003f NP:0x03ff P:0xeaea
+
+[g=2 cf=1] g0 = ORN(x2, x0); g1 = BCAX(x1, x2, g0);
+  <x0=a x1=b x2=c> [NEON_SHA3] NPN:0x003c NP:0x3cff P:0xebeb
+
+[g=2 cf=1] g0 = MUX(x1, x2, x0); g1 = MUX(g0, x1, x2);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+
+[g=2 cf=1] g0 = MUX(x0, x1, x2); g1 = XOR3(x0, x1, g0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xaffa
+
+[g=2 cf=1] g0 = MUX(x1, x0, x2); g1 = MUX(g0, x2, x1);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaee
+
+[g=2 cf=1] g0 = BCAX(x0, x2, x1); g1 = XNOR(x2, g0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0xa9a9
+
+[g=2 cf=1] g0 = NOT(x1); g1 = MUX(x0, x1, g0);
+  <x0=a x1=b> [NEON] NPN:0x0ff0 NP:0x0ff0 P:0x9999
+
+[g=2 cf=1] g0 = MUX(x1, x0, x2); g1 = MUX(g0, x1, x2);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0xa8a8
+
+[g=2 cf=1] g0 = ANDN(x1, x2); g1 = ORN(g0, x0);
+  <x0=a x1=b x2=c> [ARM SVE_PRED NEON NEON_SHA3] NPN:0x003f NP:0x03ff P:0x0aff
+
+[g=2 cf=1] g0 = MUX(x1, x2, x0); g1 = BCAX(g0, x2, x1);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaee
+
+[g=2 cf=1] g0 = NOR(x1, x2); g1 = ORN(x0, g0);
+  <x0=a x1=b x2=c> [SVE_PRED] NPN:0x0003 NP:0x3fff P:0xfefe
+
+[g=2 cf=1] g0 = MUX(x1, x2, x0); g1 = MUX(g0, x2, x1);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xeaea
+
+[g=2 cf=1] g0 = ANDN(x0, x1); g1 = BCAX(g0, x2, x3);
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x01fe NP:0x01fe P:0xa9aa
+
+[g=2 cf=1] g0 = ORN(x0, x1); g1 = XOR(x0, g0);
+  <x0=a x1=b> [ARM NEON NEON_SHA3] NPN:0x000f NP:0x000f P:0x000f
+
+[g=2 cf=1] g0 = ORN(x2, x1); g1 = MUX(x0, g0, x2);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3] NPN:0x003f NP:0x03ff P:0xaaee
+
+[g=2 cf=1] g0 = NOT(x0); g1 = BCAX(x0, x1, g0);
+  <x0=a x1=b> [NEON_SHA3 SVE2] NPN:0x000f NP:0x0fff P:0x0fff
+
+[g=2 cf=1] g0 = OR(x0, x2); g1 = MUX(x1, x2, g0);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaee
+
+[g=2 cf=1] g0 = XOR(x0, x1); g1 = AND(x0, g0);
+  <x0=a x1=b> [x86] NPN:0x000f NP:0x000f P:0x00aa
+
+[g=2 cf=1] g0 = ORN(x2, x0); g1 = BCAX(x1, g0, x0);
+  <x0=a x1=b x2=c> [NEON_SHA3] NPN:0x003f NP:0x003f P:0x88aa
+
+[g=2 cf=1] g0 = NAND(x1, x2); g1 = NAND(x0, g0);
+  <x0=a x1=b x2=c> [SVE_PRED] NPN:0x003f NP:0x03ff P:0x88ff
+
+[g=2 cf=1] g0 = BCAX(x1, x2, x0); g1 = BCAX(x0, x3, g0);
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x0356 NP:0x0356 P:0x8788
+
+[g=2 cf=1] g0 = BCAX(x0, x2, x1); g1 = MUX(g0, x1, x0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xeaea
+
+[g=2 cf=1] g0 = BCAX(x0, x2, x1); g1 = MUX(g0, x0, x1);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+
+[g=2 cf=1] g0 = AND(x0, x2); g1 = BCAX(g0, x1, x0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+
+[g=2 cf=1] g0 = BCAX(x0, x1, x2); g1 = ANDN(x2, g0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x0088
+
+[g=2 cf=1] g0 = ANDN(x1, x2); g1 = OR(x0, g0);
+  <x0=a x1=b x2=c> [x86_BMI AVX512_PRED ARM SVE_PRED NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaee
+
+[g=2 cf=1] g0 = MUX(x0, x1, x2); g1 = BCAX(x1, g0, x2);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaee
+
+[g=2 cf=1] g0 = NOT(x0); g1 = BCAX(g0, x1, x2);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0xa9a9
+
+[g=2 cf=1] g0 = ORN(x1, x2); g1 = OR(x0, g0);
+  <x0=a x1=b x2=c> [ARM SVE_PRED NEON NEON_SHA3] NPN:0x0003 NP:0x3fff P:0xeeff
+
+[g=2 cf=1] g0 = BCAX(x0, x1, x2); g1 = ANDN(g0, x2);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x000a
+
+[g=2 cf=1] g0 = MUX(x0, x1, x2); g1 = BCAX(x1, g0, x0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaee
+
+[g=2 cf=1] g0 = ANDN(x1, x2); g1 = ORN(x0, g0);
+  <x0=a x1=b x2=c> [ARM SVE_PRED NEON NEON_SHA3] NPN:0x0003 NP:0x3fff P:0xeeff
+
+[g=2 cf=1] g0 = XNOR(x0, x1); g1 = XOR(x2, g0);
+  <x0=a x1=b x2=c> [AVX512_PRED ARM NEON_SHA3 SVE2] NPN:0x3cc3 NP:0x3cc3 P:0x3cc3
+
+[g=2 cf=1] g0 = BCAX(x2, x0, x1); g1 = MUX(g0, x0, x1);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0xa8a8
+
+[g=2 cf=1] g0 = BCAX(x2, x0, x1); g1 = MUX(x1, x0, g0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x03c3 NP:0x03c3 P:0x9898
+
+[g=2 cf=1] g0 = NAND(x0, x1); g1 = NOR(x2, g0);
+  <x0=a x1=b x2=c> [SVE_PRED] NPN:0x0003 NP:0x0003 P:0x0088
+
+[g=2 cf=1] g0 = AND(x0, x2); g1 = MUX(x1, x2, g0);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0xa8a8
+
+[g=2 cf=1] g0 = XOR(x0, x1); g1 = BCAX(x1, g0, x2);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x3ccc
+
+[g=2 cf=1] g0 = ORN(x0, x1); g1 = MUX(x0, x1, g0);
+  <x0=a x1=b> [NEON] NPN:0x0ff0 NP:0x0ff0 P:0x9999
+
+[g=2 cf=1] g0 = XOR3(x0, x1, x2); g1 = NOT(g0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x3cc3 NP:0x3cc3 P:0x3cc3
+
+[g=2 cf=1] g0 = NAND(x0, x1); g1 = ORN(g0, x2);
+  <x0=a x1=b x2=c> [SVE_PRED] NPN:0x0003 NP:0x3fff P:0x3fff
+
+[g=2 cf=1] g0 = MUX(x1, x0, x2); g1 = XOR3(x1, x2, g0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x8282
+
+[g=2 cf=1] g0 = NOT(x2); g1 = MUX(x0, g0, x1);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x0afa
+
+[g=2 cf=1] g0 = BCAX(x1, x0, x2); g1 = OR(x0, g0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xaffa
+
+[g=2 cf=1] g0 = BCAX(x0, x1, x2); g1 = ORN(x2, g0);
+  <x0=a x1=b x2=c> [NEON_SHA3] NPN:0x0003 NP:0x3fff P:0xeeff
+
+[g=2 cf=1] g0 = AND(x0, x1); g1 = ANDN(g0, x2);
+  <x0=a x1=b x2=c> [x86_BMI AVX512_PRED ARM SVE_PRED NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x0088
+
+[g=2 cf=1] g0 = MUX(x2, x0, x1); g1 = BCAX(x0, x1, g0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x033f NP:0x033f P:0x88ee
+
+[g=2 cf=1] g0 = ORN(x0, x1); g1 = ORN(x2, g0);
+  <x0=a x1=b x2=c> [ARM SVE_PRED NEON NEON_SHA3] NPN:0x003f NP:0x03ff P:0xaaee
+
+[g=2 cf=1] g0 = ANDN(x1, x2); g1 = MUX(g0, x0, x2);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xeaea
+
+[g=2 cf=1] g0 = ORN(x0, x1); g1 = ANDN(x2, g0);
+  <x0=a x1=b x2=c> [ARM SVE_PRED NEON NEON_SHA3] NPN:0x0003 NP:0x0003 P:0x0088
+
+[g=2 cf=1] g0 = OR(x0, x1); g1 = BCAX(x2, x3, g0);
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x0356 NP:0x1eee P:0xa9fc
+
+[g=2 cf=1] g0 = OR(x0, x1); g1 = BCAX(x2, g0, x1);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaee
+
+[g=2 cf=1] g0 = AND(x0, x2); g1 = MUX(g0, x0, x1);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xeaea
+
+[g=2 cf=1] g0 = OR(x0, x1); g1 = MUX(g0, x2, x1);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0xa8a8
+
+[g=2 cf=1] g0 = MUX(x2, x0, x1); g1 = BCAX(g0, x1, x0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+
+[g=2 cf=1] g0 = XOR3(x0, x1, x2); g1 = OR(x2, g0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xaffa
+
+[g=2 cf=1] g0 = BCAX(x2, x0, x1); g1 = MUX(x1, g0, x0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaee
+
+[g=2 cf=1] g0 = NOR(x1, x2); g1 = ANDN(g0, x0);
+  <x0=a x1=b x2=c> [SVE_PRED] NPN:0x0003 NP:0x0003 P:0x0003
+
+[g=2 cf=1] g0 = BCAX(x2, x0, x1); g1 = MUX(g0, x1, x0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaee
+
+[g=2 cf=1] g0 = MUX(x1, x0, x2); g1 = OR(x0, g0);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaee
+
+[g=2 cf=1] g0 = MUX(x0, x1, x2); g1 = OR(x2, g0);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xeaea
+
+[g=2 cf=1] g0 = MUX(x2, x0, x1); g1 = BCAX(g0, x0, x1);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0xa8a8
+
+[g=2 cf=1] g0 = AND(x0, x2); g1 = MUX(g0, x1, x0);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+
+[g=2 cf=1] g0 = NAND(x0, x1); g1 = ORN(x2, g0);
+  <x0=a x1=b x2=c> [SVE_PRED] NPN:0x003f NP:0x03ff P:0xeaea
+
+[g=2 cf=1] g0 = ANDN(x2, x3); g1 = MUX(x0, x1, g0);
+  <x0=a x1=b x2=c x3=d> [NEON NEON_SHA3 SVE2] NPN:0x01ab NP:0x01ab P:0x88b8
+
+[g=2 cf=1] g0 = AND(x0, x1); g1 = MUX(x2, g0, x0);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+
+[g=2 cf=1] g0 = AND(x0, x1); g1 = MUX(x2, x3, g0);
+  <x0=a x1=b x2=c x3=d> [NEON NEON_SHA3 SVE2] NPN:0x01ab NP:0x01ab P:0xaac0
+
+[g=2 cf=1] g0 = NOR(x1, x2); g1 = AND(x0, g0);
+  <x0=a x1=b x2=c> [SVE_PRED] NPN:0x0003 NP:0x0003 P:0x000a
+
+[g=2 cf=1] g0 = AND(x0, x1); g1 = NOR(x2, g0);
+  <x0=a x1=b x2=c> [SVE_PRED] NPN:0x003f NP:0x003f P:0x003f
+
+[g=2 cf=1] g0 = AND(x0, x1); g1 = AND(x2, g0);
+  <x0=a x1=b x2=c> [x86 x86_BMI AVX512_PRED ARM SVE_PRED NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x8080
+
+[g=2 cf=1] g0 = ORN(x0, x1); g1 = MUX(x2, g0, x1);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3] NPN:0x03c3 NP:0x0ff3 P:0xaff0
+
+[g=2 cf=1] g0 = XOR3(x0, x1, x2); g1 = ORN(x2, g0);
+  <x0=a x1=b x2=c> [NEON_SHA3] NPN:0x003c NP:0x3cff P:0xebeb
+
+[g=2 cf=1] g0 = ANDN(x0, x1); g1 = NOT(g0);
+  <x0=a x1=b> [x86_BMI AVX512_PRED] NPN:0x000f NP:0x0fff P:0xaaff
+
+[g=2 cf=1] g0 = ORN(x0, x1); g1 = AND(x2, g0);
+  <x0=a x1=b x2=c> [ARM SVE_PRED NEON NEON_SHA3] NPN:0x003f NP:0x003f P:0x88aa
+
+[g=2 cf=1] g0 = NAND(x0, x1); g1 = OR(x2, g0);
+  <x0=a x1=b x2=c> [SVE_PRED] NPN:0x0003 NP:0x3fff P:0xafff
+
+[g=2 cf=1] g0 = ANDN(x1, x0); g1 = MUX(x2, g0, x0);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x03c3 NP:0x03c3 P:0x0af0
+
+[g=2 cf=1] g0 = XOR(x1, x2); g1 = XNOR(x0, g0);
+  <x0=a x1=b x2=c> [AVX512_PRED ARM NEON_SHA3 SVE2] NPN:0x3cc3 NP:0x3cc3 P:0x3cc3
+
+[g=2 cf=1] g0 = NOR(x1, x2); g1 = NOR(x0, g0);
+  <x0=a x1=b x2=c> [SVE_PRED] NPN:0x003f NP:0x003f P:0x00ee
+
+[g=2 cf=1] g0 = MUX(x1, x2, x0); g1 = ANDN(x0, g0);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x0088
+
+[g=2 cf=1] g0 = MUX(x1, x0, x2); g1 = MUX(x2, x1, g0);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0xa8a8
+
+[g=2 cf=1] g0 = MUX(x1, x0, x2); g1 = AND(x0, g0);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0xa8a8
+
+[g=2 cf=1] g0 = ANDN(x0, x1); g1 = AND(x2, g0);
+  <x0=a x1=b x2=c> [x86_BMI AVX512_PRED ARM SVE_PRED NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x0088
+
+[g=2 cf=1] g0 = ANDN(x0, x1); g1 = MUX(g0, x2, x0);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0xa8a8
+
+[g=2 cf=1] g0 = XOR(x0, x1); g1 = NOT(g0);
+  <x0=a x1=b> [x86 x86_BMI SVE_PRED NEON] NPN:0x0ff0 NP:0x0ff0 P:0x9999
+
+[g=2 cf=1] g0 = AND(x0, x2); g1 = BCAX(x1, g0, x0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x03c3 NP:0x0ff3 P:0xaff0
+
+[g=2 cf=1] g0 = ORN(x0, x1); g1 = NOR(x2, g0);
+  <x0=a x1=b x2=c> [SVE_PRED] NPN:0x0003 NP:0x0003 P:0x000a
+
+[g=2 cf=1] g0 = ANDN(x0, x1); g1 = ORN(g0, x0);
+  <x0=a x1=b> [ARM NEON NEON_SHA3] NPN:0x000f NP:0x0fff P:0x0fff
+
+[g=2 cf=1] g0 = MUX(x2, x0, x1); g1 = MUX(x1, g0, x0);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaee
+
+[g=2 cf=1] g0 = NAND(x0, x1); g1 = ANDN(x2, g0);
+  <x0=a x1=b x2=c> [SVE_PRED] NPN:0x0003 NP:0x0003 P:0x8080
+
+[g=2 cf=1] g0 = XNOR(x0, x1); g1 = AND(x2, g0);
+  <x0=a x1=b x2=c> [AVX512_PRED ARM NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x8282
+
+[g=2 cf=1] g0 = MUX(x2, x0, x1); g1 = MUX(x1, x0, g0);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0xa8a8
+
+[g=2 cf=1] g0 = OR(x0, x1); g1 = NAND(x2, g0);
+  <x0=a x1=b x2=c> [SVE_PRED] NPN:0x003f NP:0x03ff P:0x03ff
+
+[g=2 cf=1] g0 = OR(x1, x2); g1 = OR(x0, g0);
+  <x0=a x1=b x2=c> [x86 x86_BMI AVX512_PRED ARM SVE_PRED NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x3fff P:0xfefe
+
+[g=2 cf=1] g0 = ANDN(x0, x1); g1 = MUX(x2, x0, g0);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+
+[g=2 cf=1] g0 = ORN(x0, x1); g1 = MUX(g0, x0, x2);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3] NPN:0x003f NP:0x03ff P:0xeaea
+
+[g=2 cf=1] g0 = XNOR(x0, x1); g1 = OR(x0, g0);
+  <x0=a x1=b> [AVX512_PRED] NPN:0x000f NP:0x0fff P:0xaaff
+
+[g=2 cf=1] g0 = MUX(x1, x0, x2); g1 = XNOR(x0, g0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xebeb
+
+[g=2 cf=1] g0 = NOR(x1, x2); g1 = NAND(x0, g0);
+  <x0=a x1=b x2=c> [SVE_PRED] NPN:0x0003 NP:0x3fff P:0xeeff
+
+[g=2 cf=1] g0 = ANDN(x1, x0); g1 = XNOR(x1, g0);
+  <x0=a x1=b> [AVX512_PRED ARM NEON_SHA3 SVE2] NPN:0x000f NP:0x0fff P:0x0fff
+
+[g=2 cf=1] g0 = OR(x0, x1); g1 = XNOR(x0, g0);
+  <x0=a x1=b> [AVX512_PRED] NPN:0x000f NP:0x0fff P:0xaaff
+
+[g=2 cf=1] g0 = BCAX(x0, x1, x2); g1 = OR(x2, g0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaee
+
+[g=2 cf=1] g0 = XNOR(x1, x2); g1 = ANDN(x0, g0);
+  <x0=a x1=b x2=c> [AVX512_PRED ARM NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x0aa0
+
+[g=2 cf=1] g0 = BCAX(x0, x1, x2); g1 = XOR(x0, g0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x3ccc
+
+[g=2 cf=1] g0 = ORN(x0, x1); g1 = ORN(g0, x2);
+  <x0=a x1=b x2=c> [ARM SVE_PRED NEON NEON_SHA3] NPN:0x0003 NP:0x3fff P:0xafff
+
+[g=2 cf=1] g0 = XOR(x0, x1); g1 = ORN(g0, x0);
+  <x0=a x1=b> [ARM NEON NEON_SHA3] NPN:0x000f NP:0x0fff P:0x0fff
+
+[g=2 cf=1] g0 = OR(x0, x1); g1 = NOR(x2, g0);
+  <x0=a x1=b x2=c> [SVE_PRED] NPN:0x0003 NP:0x0003 P:0x0003
+
+[g=2 cf=1] g0 = AND(x1, x2); g1 = BCAX(x1, x0, g0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x8282
+
+[g=2 cf=1] g0 = ORN(x0, x1); g1 = XOR(x1, g0);
+  <x0=a x1=b> [ARM NEON NEON_SHA3] NPN:0x000f NP:0x0fff P:0x0fff
+
+[g=2 cf=1] g0 = MUX(x0, x3, x1); g1 = BCAX(x2, x3, g0);
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x0359 NP:0x1bd7 P:0xebd8
+
+[g=2 cf=1] g0 = OR(x1, x2); g1 = AND(x0, g0);
+  <x0=a x1=b x2=c> [x86 x86_BMI AVX512_PRED ARM SVE_PRED NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0xa8a8
+
+[g=2 cf=1] g0 = MUX(x1, x2, x0); g1 = MUX(x2, g0, x1);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xeaea
+
+[g=2 cf=1] g0 = OR(x1, x2); g1 = ORN(g0, x0);
+  <x0=a x1=b x2=c> [ARM SVE_PRED NEON NEON_SHA3] NPN:0x0003 NP:0x3fff P:0xeeff
+
+[g=2 cf=1] g0 = BCAX(x2, x0, x1); g1 = BCAX(x0, x1, g0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x3cff P:0xaffa
+
+[g=2 cf=1] g0 = OR(x0, x1); g1 = XOR(x0, g0);
+  <x0=a x1=b> [x86] NPN:0x000f NP:0x000f P:0x00aa
+
+[g=2 cf=1] g0 = AND(x0, x1); g1 = XNOR(x0, g0);
+  <x0=a x1=b> [AVX512_PRED] NPN:0x000f NP:0x0fff P:0xaaff
+
+[g=2 cf=1] g0 = ANDN(x1, x0); g1 = BCAX(g0, x2, x0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaee
+
+[g=2 cf=1] g0 = OR(x1, x2); g1 = MUX(x0, g0, x1);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xeaea
+
+[g=2 cf=1] g0 = BCAX(x2, x0, x1); g1 = AND(x2, g0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x8282
+
+[g=2 cf=1] g0 = MUX(x1, x0, x2); g1 = BCAX(g0, x2, x1);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+
+[g=2 cf=1] g0 = MUX(x1, x2, x0); g1 = XOR(x0, g0);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x0aa0
+
+[g=2 cf=1] g0 = NAND(x0, x1); g1 = AND(x2, g0);
+  <x0=a x1=b x2=c> [SVE_PRED] NPN:0x003f NP:0x003f P:0x0aaa
+
+[g=2 cf=1] g0 = MUX(x2, x0, x1); g1 = XNOR(x2, g0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x88bb
+
+[g=2 cf=1] g0 = XNOR(x0, x1); g1 = ANDN(g0, x1);
+  <x0=a x1=b> [AVX512_PRED ARM NEON_SHA3 SVE2] NPN:0x000f NP:0x000f P:0x000f
+
+[g=2 cf=1] g0 = ORN(x0, x1); g1 = NAND(x2, g0);
+  <x0=a x1=b x2=c> [SVE_PRED] NPN:0x003f NP:0x03ff P:0x0aff
+
+[g=2 cf=1] g0 = XOR3(x0, x1, x2); g1 = ANDN(x0, g0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x0aa0
+
+[g=2 cf=1] g0 = BCAX(x0, x1, x2); g1 = XNOR(x0, g0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x8787
+
+[g=2 cf=1] g0 = MUX(x0, x1, x2); g1 = ANDN(g0, x2);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x0003 NP:0x0003 P:0x0088
+
+[g=2 cf=1] g0 = NOT(x1); g1 = XOR(x0, g0);
+  <x0=a x1=b> [x86 x86_BMI SVE_PRED NEON] NPN:0x0ff0 NP:0x0ff0 P:0x9999
+
+[g=2 cf=1] g0 = XOR(x0, x2); g1 = MUX(g0, x0, x1);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x033f NP:0x033f P:0x88ee
+
+[g=2 cf=1] g0 = NOT(x1); g1 = OR(x0, g0);
+  <x0=a x1=b> [x86 x86_BMI AVX512_PRED] NPN:0x000f NP:0x0fff P:0xaaff
+
+[g=2 cf=1] g0 = BCAX(x0, x2, x1); g1 = XOR(x2, g0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x03fc NP:0x03fc P:0x03fc
+
+[g=2 cf=1] g0 = MUX(x2, x0, x1); g1 = MUX(x0, x1, g0);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x88aa
+
+[g=2 cf=1] g0 = MUX(x0, x1, x2); g1 = BCAX(x2, g0, x1);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xeaea
+
+[g=2 cf=1] g0 = ORN(x1, x2); g1 = ANDN(g0, x0);
+  <x0=a x1=b x2=c> [ARM SVE_PRED NEON NEON_SHA3] NPN:0x003f NP:0x003f P:0x00af
+
+[g=2 cf=1] g0 = MUX(x0, x1, x2); g1 = MUX(g0, x1, x2);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x033f NP:0x033f P:0xe8e8
+
+[g=2 cf=1] g0 = MUX(x2, x0, x1); g1 = MUX(x0, g0, x1);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xeaea
+
+[g=2 cf=1] g0 = NOT(x1); g1 = BCAX(x0, x1, g0);
+  <x0=a x1=b> [NEON_SHA3 SVE2] NPN:0x000f NP:0x000f P:0x000f
+
+[g=2 cf=1] g0 = AND(x0, x1); g1 = NAND(x2, g0);
+  <x0=a x1=b x2=c> [SVE_PRED] NPN:0x0003 NP:0x3fff P:0x3fff
+
+[g=2 cf=1] g0 = AND(x0, x1); g1 = NOT(g0);
+  <x0=a x1=b> [x86 x86_BMI AVX512_PRED ARM NEON NEON_SHA3 SVE2] NPN:0x000f NP:0x0fff P:0x0fff
+
+[g=2 cf=1] g0 = AND(x0, x1); g1 = ORN(g0, x2);
+  <x0=a x1=b x2=c> [ARM SVE_PRED NEON NEON_SHA3] NPN:0x003f NP:0x03ff P:0x88ff
+
+[g=2 cf=1] g0 = ANDN(x0, x1); g1 = NAND(x2, g0);
+  <x0=a x1=b x2=c> [SVE_PRED] NPN:0x0003 NP:0x3fff P:0xafff
+
+[g=2 cf=1] g0 = MUX(x0, x1, x2); g1 = MUX(g0, x2, x1);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x033f NP:0x033f P:0x88ee
+
+[g=2 cf=1] g0 = NOR(x1, x2); g1 = ORN(g0, x0);
+  <x0=a x1=b x2=c> [SVE_PRED] NPN:0x003f NP:0x03ff P:0x03ff
+
+[g=2 cf=1] g0 = ANDN(x2, x1); g1 = BCAX(g0, x0, x2);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0xa8a8
+
+[g=2 cf=1] g0 = ORN(x1, x0); g1 = ANDN(g0, x1);
+  <x0=a x1=b> [ARM NEON NEON_SHA3] NPN:0x000f NP:0x000f P:0x000f
+
+[g=2 cf=1] g0 = BCAX(x0, x1, x2); g1 = BCAX(g0, x2, x1);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xaaee
+
+[g=2 cf=1] g0 = OR(x1, x2); g1 = ANDN(g0, x0);
+  <x0=a x1=b x2=c> [x86_BMI AVX512_PRED ARM SVE_PRED NEON NEON_SHA3 SVE2] NPN:0x003f NP:0x003f P:0x00ee
+
+[g=2 cf=1] g0 = XNOR(x0, x1); g1 = ORN(x2, g0);
+  <x0=a x1=b x2=c> [ARM NEON_SHA3] NPN:0x003c NP:0x3cff P:0xaffa
+
+[g=2 cf=1] g0 = BCAX(x0, x1, x2); g1 = BCAX(x2, g0, x1);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x003f NP:0x03ff P:0xeaea
+
+[g=2 cf=1] g0 = ANDN(x1, x2); g1 = NOR(x0, g0);
+  <x0=a x1=b x2=c> [SVE_PRED] NPN:0x003f NP:0x003f P:0x00af
+
+[g=2 cf=1] g0 = BCAX(x1, x2, x0); g1 = BCAX(x3, x0, g0);
+  <x0=a x1=b x2=c x3=d> [NEON_SHA3 SVE2] NPN:0x0356 NP:0x1eee P:0xa9fc
+
+[g=2 cf=1] g0 = MUX(x1, x2, x0); g1 = ORN(g0, x0);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3] NPN:0x0003 NP:0x3fff P:0xafff
+
+[g=2 cf=1] g0 = BCAX(x0, x1, x2); g1 = ANDN(x0, g0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x0aa0
+
+[g=2 cf=1] g0 = MUX(x2, x0, x1); g1 = BCAX(x1, x0, g0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x033f NP:0x033f P:0xe8e8
+
+[g=2 cf=1] g0 = MUX(x0, x1, x2); g1 = XOR(x0, g0);
+  <x0=a x1=b x2=c> [NEON NEON_SHA3 SVE2] NPN:0x03cf NP:0x03cf P:0x0afa
+
+[g=2 cf=1] g0 = XOR3(x0, x1, x2); g1 = AND(x2, g0);
+  <x0=a x1=b x2=c> [NEON_SHA3 SVE2] NPN:0x003c NP:0x003c P:0x8282
+
+[g=2 cf=1] g0 = NOR(x1, x2); g1 = OR(x0, g0);
+  <x0=a x1=b x2=c> [SVE_PRED] NPN:0x003f NP:0x03ff P:0xaaaf
